@@ -20,13 +20,13 @@ describe("RSVP cutoff (Philippine time)", () => {
 });
 
 describe("countdown", () => {
-  it("counts down to 11:00 AM Manila on November 17", () => {
-    const now = Date.parse("2026-11-16T10:59:30+08:00");
+  it("counts down to 10:30 AM Manila on November 17", () => {
+    const now = Date.parse("2026-11-16T10:29:30+08:00");
     expect(countdown(now)).toEqual({ phase: "before", days: 1, hours: 0, minutes: 0, seconds: 30 });
   });
 
   it("never shows negative numbers once the event starts", () => {
-    expect(countdown(Date.parse("2026-11-17T11:00:00+08:00"))).toEqual({ phase: "during" });
+    expect(countdown(Date.parse("2026-11-17T10:30:00+08:00"))).toEqual({ phase: "during" });
     expect(countdown(Date.parse("2026-11-17T18:00:00+08:00"))).toEqual({ phase: "during" });
     expect(countdown(Date.parse("2026-11-18T00:00:00+08:00"))).toEqual({ phase: "after" });
   });

@@ -16,7 +16,7 @@ export const event = {
   weekday: "Tuesday",
   dateLong: "November 17, 2026",
   // Countdown target: start of the christening, Philippine time.
-  startsAt: "2026-11-17T11:00:00+08:00",
+  startsAt: "2026-11-17T10:30:00+08:00",
   // After this moment the hero thanks guests instead of counting down.
   endsAt: "2026-11-17T23:59:59+08:00",
   tagline: "A little faith, a lot of love, and a lifetime of blessings.",
@@ -25,7 +25,7 @@ export const event = {
     heading: "A Blessed Beginning",
     text: "With grateful hearts, we invite you to witness a beautiful milestone as our little Isabelle receives the blessing of baptism.",
     label: "Christening Ceremony",
-    time: "11:00 AM",
+    time: "10:30 AM",
     venue: "St. Michael The Archangel Parish",
     address: "Brgy. San Miguel, Tarlac City, Tarlac",
     map: {

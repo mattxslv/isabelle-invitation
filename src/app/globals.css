@@ -1257,3 +1257,83 @@ html:not(.js) .gp-scene[data-scene] {
 .edge-bouquet.edge-spray { width:clamp(115px,29vw,205px); rotate:-10deg; }
 .edge-bouquet.edge-corner { width:clamp(85px,22vw,165px); rotate:9deg; }
 .garden-rsvp .edge-bouquet.edge-spray { rotate:14deg; width:clamp(100px,26vw,180px); }
+
+/* A clear, quiet family dashboard, separate from the decorative invitation. */
+.admin-page { min-height:100svh; background:radial-gradient(ellipse 85% 450px at 50% 0,#e7daf2aa,transparent),#faf7fc; padding:2rem 1rem 4rem; }
+.admin-shell { max-width:62rem; margin:auto; }
+.admin-header { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1.6rem; border:1px solid #ded0e8; border-radius:1.5rem; background:linear-gradient(135deg,#fffdfb,#f1e8f7); box-shadow:0 14px 40px -28px #76518e66; }
+.admin-eyebrow { font-size:.62rem; text-transform:uppercase; letter-spacing:.16em; font-weight:600; color:#8b6b9c; }
+.admin-header h1 { font-family:var(--font-display); font-size:2.7rem; font-weight:500; color:#64477b; line-height:1.2; margin-top:.25rem; }
+.admin-event-date { font-size:.73rem; color:#7c6c82; margin-top:.4rem; }
+.admin-signout { display:flex; align-items:center; justify-content:center; gap:.4rem; min-height:2.8rem; padding:.65rem .9rem; font-size:.78rem; font-weight:500; color:#6f5090; border:1px solid #cbb7d7; border-radius:.85rem; background:#fffdfb; cursor:pointer; box-shadow:0 4px 10px -8px #6f5090; transition:background .2s,box-shadow .2s; white-space:nowrap; }
+.admin-signout:hover { background:#eee1f6; box-shadow:0 5px 14px -9px #6f5090; }
+.admin-intro { display:flex; justify-content:space-between; gap:1rem; align-items:center; margin:1.2rem .25rem 1.5rem; font-size:.8rem; color:#7b6a80; }
+.admin-intro a { color:#76548e; text-decoration:none; white-space:nowrap; }
+.admin-intro a:hover { text-decoration:underline; }
+.admin-dashboard { display:grid; gap:1.5rem; }
+.admin-preview { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.9rem 1.1rem; border:1px solid #ded1e6; border-radius:1rem; background:#fffdfb; }
+.admin-preview.is-sample { background:#f0e8f7; border-style:dashed; border-color:#c3a7d6; }
+.admin-preview-title { font-size:.82rem; font-weight:600; color:#705088; }
+.admin-preview p { font-size:.73rem; color:#7f6c88; margin-top:.15rem; }
+.admin-preview button { flex:none; background:#fffdfb; padding:.6rem .75rem; border:1px solid #d1bddf; border-radius:.65rem; color:#6b4f82; font-size:.72rem; cursor:pointer; }
+.admin-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.8rem; }
+.admin-stat { position:relative; border:1px solid #e1d5e8; border-radius:1.1rem; padding:1.15rem; background:#fffdfb; box-shadow:0 10px 24px -19px #7c558f77; }
+.admin-stat-icon { display:grid; place-items:center; width:2rem; height:2rem; border-radius:.65rem; background:#eee4f6; color:#84619a; margin-bottom:.65rem; }
+.admin-stat dt { font-size:.74rem; color:#7a6883; }
+.admin-stat dd { font-family:var(--font-display); font-size:2.6rem; font-weight:600; line-height:1.15; margin-top:.1rem; color:#6e5084; }
+.stat-yes .admin-stat-icon { background:#e8f1e9; color:#597762; }
+.stat-no .admin-stat-icon { background:#f6e9ed; color:#a76a7d; }
+.admin-panel { padding:1.5rem; background:#fffdfb; border:1px solid #e1d5e8; border-radius:1.35rem; box-shadow:0 14px 32px -25px #76518e66; }
+.admin-panel-heading { display:flex; justify-content:space-between; align-items:center; gap:.75rem; }
+.admin-panel-heading h2 { font-family:var(--font-display); font-size:1.85rem; color:#6b4d83; line-height:1.3; margin-top:.2rem; }
+.admin-count { padding:.35rem .65rem; border-radius:999px; font-size:.68rem; color:#7c628d; background:#f0e8f6; white-space:nowrap; }
+.admin-search { margin-top:1.3rem; }
+.admin-search label { display:block; font-size:.8rem; font-weight:500; margin-bottom:.45rem; }
+.admin-search > div { position:relative; }
+.admin-search svg { position:absolute; left:.9rem; top:50%; translate:0 -50%; color:#a084b0; }
+.admin-search .field { padding-left:2.5rem; border-radius:.8rem; font-size:.85rem; border-color:#dfd2e7; min-height:3rem; }
+.admin-filters { display:flex; flex-wrap:wrap; gap:.45rem; margin-top:.85rem; }
+.admin-filters button { border:1px solid #e3d8ea; border-radius:999px; padding:.45rem .85rem; font-size:.74rem; color:#887190; cursor:pointer; background:#fffdfb; }
+.admin-filters button[aria-pressed="true"] { color:#fff; background:#816195; border-color:#816195; }
+.admin-result-count { font-size:.7rem; color:#99869e; margin:1rem 0 .5rem; }
+.admin-guest-list { display:grid; gap:.65rem; }
+.admin-guest { display:flex; flex-wrap:wrap; align-items:center; gap:.75rem; padding:.95rem; border:1px solid #ece3f0; border-radius:1rem; background:#fcf9fd; }
+.admin-avatar { display:grid; place-items:center; width:2.5rem; height:2.5rem; border-radius:50%; flex:none; background:#ede0f4; color:#916aa4; font-family:var(--font-display); font-size:1.4rem; }
+.admin-guest-info { min-width:0; flex:1; }
+.admin-guest-info > p { font-size:.87rem; font-weight:500; color:#695271; overflow-wrap:anywhere; }
+.admin-guest-info time,.admin-role { font-size:.69rem; color:#9a869f; }
+.admin-role { text-transform:capitalize; }
+.admin-status { font-size:.66rem; font-weight:500; padding:.3rem .6rem; border-radius:999px; white-space:nowrap; }
+.status-yes { background:#e7f0e8; color:#55725d; }
+.status-no { background:#f6e8ed; color:#a16b7e; }
+.admin-duplicate { display:block; font-size:.65rem; color:#a4825e; }
+.admin-remove { border:1px solid #eadbe2; border-radius:.6rem; padding:.4rem .55rem; color:#a16b7e; font-size:.68rem; cursor:pointer; background:#fff; }
+.admin-remove-confirm { display:flex; gap:.4rem; }
+.admin-remove-confirm button { border-radius:.5rem; padding:.4rem .55rem; font-size:.67rem; background:#f0e8f3; cursor:pointer; }
+.admin-remove-confirm button[type="submit"] { background:#9c6277; color:white; }
+.admin-panel-note { margin:.6rem 0 1.1rem; font-size:.8rem; color:#90799a; }
+.admin-empty { display:flex; flex-direction:column; align-items:center; padding:2rem 1rem; text-align:center; color:#b09abb; }
+.admin-empty h3 { font-family:var(--font-display); font-size:1.45rem; color:#866595; margin-top:.7rem; }
+.admin-empty p { font-size:.79rem; max-width:22rem; margin-top:.3rem; color:#95829e; }
+.admin-loading { padding:5rem 1rem; text-align:center; font-family:var(--font-display); font-size:1.75rem; color:#866595; }
+@media (max-width:600px) {
+ .admin-page { padding-top:1rem; }
+ .admin-header { padding:1.15rem; align-items:flex-start; }
+ .admin-header h1 { font-size:2.3rem; }
+ .admin-header .admin-event-date { max-width:12rem; }
+ .admin-signout { font-size:.7rem; padding:.5rem .65rem; min-height:2.5rem; }
+ .admin-intro { align-items:flex-start; font-size:.72rem; }
+ .admin-intro p { max-width:12rem; }
+ .admin-preview { flex-direction:column; align-items:flex-start; gap:.6rem; }
+ .admin-stats { gap:.5rem; }
+ .admin-stat { padding:.9rem .75rem; }
+ .admin-stat dt { font-size:.65rem; }
+ .admin-stat dd { font-size:2.25rem; }
+ .admin-panel { padding:1.15rem; }
+ .admin-panel-heading h2 { font-size:1.55rem; }
+ .admin-panel .admin-eyebrow { font-size:.54rem; letter-spacing:.1em; }
+ .admin-avatar { width:2rem; height:2rem; font-size:1.2rem; }
+ .admin-guest { padding:.8rem; gap:.55rem; }
+ .admin-guest-info > p { font-size:.8rem; }
+ .admin-status { font-size:.6rem; padding:.3rem .45rem; }
+}

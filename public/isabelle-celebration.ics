@@ -4,10 +4,10 @@ PRODID:-//Isabelle Family//Invitation//EN
 BEGIN:VEVENT
 UID:isabelle-20261117@family.invitation
 DTSTAMP:20261030T000000Z
-DTSTART:20261117T030000Z
+DTSTART:20261117T023000Z
 SUMMARY:Isabelle First Birthday and Christening
 LOCATION:St. Michael The Archangel Parish\, Tarlac City
-DESCRIPTION:Christening at 11:00 AM. Reception at 2:00 PM at Fernandez Private
+DESCRIPTION:Christening at 10:30 AM. Reception at 2:00 PM at Fernandez Private
   Resort\, St. Bernard Subdivision\, Tarlac City. Times are Philippine time.
 END:VEVENT
 END:VCALENDAR
