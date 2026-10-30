@@ -35,7 +35,17 @@ export const viewport: Viewport = {
 
 // Marks the page as JS-capable before first paint so scroll reveals can
 // start hidden. Without JS, everything stays visible.
-const JS_FLAG = "document.documentElement.classList.add('js')";
+const JS_FLAG = `
+document.documentElement.classList.add('js');
+if ((location.pathname === '/' || location.pathname.startsWith('/godparents')) &&
+    performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+  document.documentElement.dataset.previousScrollRestoration = history.scrollRestoration;
+  document.documentElement.dataset.reloadTop = 'true';
+  history.scrollRestoration = 'manual';
+  history.replaceState(history.state, '', location.pathname + location.search);
+  window.scrollTo({top: 0, left: 0, behavior: 'instant'});
+}
+`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
