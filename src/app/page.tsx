@@ -116,7 +116,7 @@ function Hero() {
           {event.tagline}
         </p>
         <HeartRule className="enter mt-4" />
-        <div className="hero-actions enter" style={delay(1050)}><a href="#rsvp" className="btn btn-primary"><Icon name="envelope" size={19} />Join the celebration</a><a className="calendar-link" href={calendarUrl} target="_blank" rel="noopener noreferrer" aria-label="Save the date in Google Calendar"><Icon name="heart" size={15} />Save the date</a></div>
+        <div className="hero-actions enter" style={delay(1050)}><a href="#rsvp" className="btn btn-primary"><Icon name="envelope" size={19} />Join the celebration</a><a className="btn btn-ghost calendar-link" href={calendarUrl} target="_blank" rel="noopener noreferrer" aria-label="Save the date in Google Calendar"><Icon name="heart" size={18} />Save the date</a></div>
         </div>
       </div>
     </section>

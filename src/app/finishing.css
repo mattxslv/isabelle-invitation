@@ -92,3 +92,5 @@
   .admin-brand .admin-eyebrow { font-size:.5rem; letter-spacing:.1em; }
   .admin-event-date { font-size:.64rem; }
 }
+
+.hero-actions .calendar-link { padding:.75rem 1.25rem; text-decoration:none; }
