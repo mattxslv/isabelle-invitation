@@ -38,7 +38,7 @@ export function GardenHeader({ letter = false }: { letter?: boolean }) {
     setActive(id);
   }
   return <nav className="garden-nav" aria-label={letter ? "Invitation navigation" : "Celebration navigation"}>
-    <Link className="garden-monogram" href={letter ? "/" : "#welcome"} aria-label="Isabelle's invitation">I<span aria-hidden="true">&#10023;</span></Link>
+    <Link className="garden-monogram" href="/admin/login" aria-label="Family sign in">I<span aria-hidden="true">&#10023;</span></Link>
     <span className="garden-nav-date">17 NOV 2026</span>
     <div className={`garden-nav-links ${letter ? "" : "is-section-nav"}`} data-active={letter ? undefined : active}>
       {!letter && <span className="nav-indicator" aria-hidden="true" />}
