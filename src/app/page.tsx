@@ -137,7 +137,7 @@ function VenueCard({
     <div className="card relative z-[1] px-6 pb-6 pt-5 text-center" data-reveal="zoom">
       <Icon name={icon} size={30} strokeWidth={1.3} className="mx-auto text-gold" />
       <p className="eyebrow mt-2 !text-[0.85rem]">{label}</p>
-      <p className="mt-1 font-display text-[2rem] font-medium leading-tight">{time}</p>
+      <p className="venue-time mt-2 font-display font-medium leading-tight"><span>{time.replace(/\s*(AM|PM)$/i, "")}</span>{" "}<span className="venue-period">{time.match(/(AM|PM)$/i)?.[1]}</span></p>
       <p className="mt-1 font-display text-[1.4rem] font-semibold leading-tight">{venue}</p>
       <p className="prose-soft mt-1">{address}</p>
       <a

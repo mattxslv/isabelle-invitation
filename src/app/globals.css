@@ -1055,3 +1055,9 @@ html:not(.js) .gp-scene[data-scene] {
 .envelope-hint { position:absolute; top:78%; left:1rem; right:1rem; display:flex; align-items:center; justify-content:center; gap:.6rem; font-family:var(--font-display); font-size:1.15rem; color:var(--color-gold-ink); }
 @media (max-height:740px) { .tap-envelope .gp-sticky { min-height:650px; } .tap-envelope .gp-intro { top:80px; } }
 @media (prefers-reduced-motion:reduce) { .imported-loop img,.envelope-hint img { display:none; } .motion-still { display:block; } .tap-envelope .gp-sticky { padding:0; } }
+
+.venue-time { font-size:2rem; font-variant-numeric:lining-nums; }
+.venue-period { font-family:var(--font-sans); font-size:.78rem; font-weight:500; letter-spacing:.08em; vertical-align:.15em; }
+.flame-loop { filter:sepia(.6) saturate(.45); opacity:.85; }
+.flame-still { display:none; }
+@media (prefers-reduced-motion:reduce) { .flame-loop { display:none; } .flame-still { display:block; } }

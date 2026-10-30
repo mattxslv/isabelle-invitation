@@ -5,8 +5,8 @@ import type { SVGProps } from "react";
 // Gold line icons, drawn on a 24px grid.
 const PATHS = {
   cross: "M12 3v18M7.5 8h9",
-  font: "M5 10h14M6 10c0 4 2.6 6 6 6s6-2 6-6M12 16v3.5M8.5 21h7M12 3.5c-1.2 1.6-2 2.7-2 3.6a2 2 0 0 0 4 0c0-.9-.8-2-2-3.6z",
-  cake: "M4 21h16M5 21v-6h14v6M5 15.5c1.2 1 2.3 1 3.5 0s2.3-1 3.5 0 2.3 1 3.5 0 2.3-1 3.5 0M7 15v-3.5h10V15M12 11.5V9M12 6.6c.8 0 1.2-.6 1.2-1.2 0-.8-1.2-2.3-1.2-2.3s-1.2 1.5-1.2 2.3c0 .6.4 1.2 1.2 1.2z",
+  font: "M5 10h14M6 10c0 4 2.6 6 6 6s6-2 6-6M12 16v3.5M8.5 21h7",
+  cake: "M4 21h16M5 21v-6h14v6M5 15.5c1.2 1 2.3 1 3.5 0s2.3-1 3.5 0 2.3 1 3.5 0 2.3-1 3.5 0M7 15v-3.5h10V15M12 11.5V9",
   pin: "M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21zM12 12.3a2.3 2.3 0 1 0 0-4.6 2.3 2.3 0 0 0 0 4.6z",
   clock: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3.2 2",
   dress: "M9.2 3 8.4 7l2.3 2.6L6 20.5h12L13.3 9.6 15.6 7l-.8-4M9.2 3c1.3 1.1 4.3 1.1 5.6 0",
@@ -51,6 +51,10 @@ export function Icon({
       {...props}
     >
       <path d={PATHS[name]} />
+      {(name === "font" || name === "cake") && <>
+        <image href="/animations/flame.png" x={8.5} y={name === "font" ? 0.5 : 0} width={7} height={9} className="flame-loop" />
+        <path className="flame-still" d="M12 2c-1 1.6-1.7 2.5-1.7 3.3a1.7 1.7 0 0 0 3.4 0C13.7 4.5 13 3.6 12 2Z" />
+      </>}
     </svg>
   );
 }
