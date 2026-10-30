@@ -198,9 +198,6 @@ export function RsvpForm() {
         <Icon name="send" size={20} />
         {pending ? "Sending..." : "Send RSVP"}
       </button>
-      {!ready && (
-        <p className="reply-help">Enter your name and select a reply.</p>
-      )}
     </form>
   );
 }

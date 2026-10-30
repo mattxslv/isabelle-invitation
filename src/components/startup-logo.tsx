@@ -7,11 +7,11 @@ export function StartupLogo() {
   const [stage, setStage] = useState("show");
   useEffect(() => {
     document.documentElement.classList.add("startup-active");
-    const fade = window.setTimeout(() => setStage("leave"), 1250);
+    const fade = window.setTimeout(() => setStage("leave"), 750);
     const finish = window.setTimeout(() => {
       document.documentElement.classList.remove("startup-active");
       setStage("done");
-    }, 1500);
+    }, 1000);
     return () => {
       clearTimeout(fade);
       clearTimeout(finish);

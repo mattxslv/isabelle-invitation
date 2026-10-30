@@ -13,6 +13,13 @@
 .garden-nav { position:fixed; background:#fffdf8f2; border-color:#e0d1be; backdrop-filter:blur(10px); box-shadow:0 8px 24px -20px #70563766; }
 .garden-nav-links a { background:transparent; }
 .garden-nav-links a.is-active { background:#eee4f3; color:#73528b; font-weight:600; }
+.garden-nav-links.is-section-nav { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); width:clamp(10.6rem,45vw,12rem); gap:0; position:relative; isolation:isolate; }
+.garden-nav-links.is-section-nav > a { position:relative; z-index:1; text-align:center; padding-inline:.4rem; background:transparent; }
+.nav-indicator { position:absolute; inset:0 auto 0 0; width:calc(100% / 3); border-radius:999px; background:#eee4f3; pointer-events:none; transition:transform 380ms var(--ease-soft); }
+.is-section-nav[data-active="details"] .nav-indicator { transform:translateX(100%); }
+.is-section-nav[data-active="rsvp"] .nav-indicator { transform:translateX(200%); }
+.photo-trigger-oval { clip-path:ellipse(49.8% 49.8% at 50% 50%); }
+.photo-trigger-oval:focus-visible .portrait::after { content:""; position:absolute; inset:4%; border:2px solid var(--color-plum); border-radius:50%; pointer-events:none; }
 .garden-page .btn { border-radius:.85rem; font-family:var(--font-sans); font-size:.9rem; letter-spacing:.01em; box-shadow:0 6px 14px -11px #765c8b70; }
 .garden-page .btn-primary { background:#f0e8f5; color:#694b81; border:1px solid #cbb6da; }
 .garden-page .btn-primary:hover { background:#e9dcf1; box-shadow:0 8px 16px -12px #765c8b90; }

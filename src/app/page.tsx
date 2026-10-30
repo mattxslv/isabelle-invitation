@@ -63,6 +63,7 @@ function Hero() {
               alt={`Portrait of ${c.shortName} in a white dress and bow`}
               label={`Enlarge ${c.shortName}'s portrait`}
               className="layer"
+              oval
             >
               <span className="portrait garden-portrait block">
                 <span className="portrait-photo block">

@@ -13,12 +13,14 @@ export function Lightbox({
   label,
   children,
   className = "",
+  oval = false,
 }: {
   full: Full;
   alt: string;
   label: string;
   children: ReactNode;
   className?: string;
+  oval?: boolean;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [loaded, setLoaded] = useState(false);
@@ -31,7 +33,7 @@ export function Lightbox({
 
   return (
     <>
-      <button type="button" className={`photo-trigger ${className}`} onClick={open} aria-label={label} aria-haspopup="dialog">
+      <button type="button" className={`photo-trigger ${oval ? "photo-trigger-oval" : ""} ${className}`} onClick={open} aria-label={label} aria-haspopup="dialog">
         {children}
       </button>
       <dialog

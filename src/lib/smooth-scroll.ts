@@ -12,7 +12,7 @@ export function scrollToLetter(element: HTMLElement, onComplete: () => void): ()
     window.removeEventListener("keydown", cancel);
   }
   function step(now: number) {
-    const t = Math.min(1, (now - began) / 1800);
+    const t = Math.min(1, (now - began) / 1200);
     const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     window.scrollTo({ top: start + (end - start) * eased, behavior: "instant" });
     if (t < 1) frame = requestAnimationFrame(step);
