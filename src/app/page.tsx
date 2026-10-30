@@ -10,12 +10,14 @@ import { fullPhoto, Photo } from "@/components/photo";
 import { RsvpForm } from "@/components/rsvp-form";
 import { ChapterLabel, DayOverview, GardenHeader, GardenLights } from "@/components/garden";
 import { ScrollFx } from "@/components/scroll-fx";
+import { StartupLogo } from "@/components/startup-logo";
 
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
 export default function InvitationPage() {
   return (
     <main className="garden-page relative">
+      <StartupLogo />
       <ScrollFx />
       <GardenHeader />
       <Hero />
@@ -69,13 +71,16 @@ function Hero() {
                 <GoldFrame className="portrait-frame" />
               </span>
             </Lightbox>
+            <Butterfly tone="lavender" size={42} tilt={18} path={2} dur={14} delay={2} appear={0.7} className="bfly-front -right-[5%] top-[9%]" />
+            <Butterfly tone="blush" size={34} tilt={-16} path={4} dur={12} delay={4} appear={1.1} className="bfly-front -left-[3%] bottom-[10%]" />
           </div>
         </div>
 
         <p className="photo-whisper">A little smile, a lifetime of love</p>
         </div>
         <div className="hero-copy">
-        <h1 id="hero-name" className="enter mt-7" style={delay(500)}>
+        <h1 id="hero-name" className="enter relative mt-7" style={delay(500)}>
+          <Butterfly tone="ivory" size={28} tilt={16} path={1} dur={15} appear={1.4} className="bfly-front -right-1 -top-1" />
           <span className="script gold-text block px-2 pb-2 pt-1 text-[clamp(2.75rem,14.6vw,4.6rem)] leading-[1.15]">
             {c.displayFirst}
           </span>
@@ -148,6 +153,7 @@ function VenueCard({
 }) {
   return (
     <div className="card venue-card relative z-[1] px-6 pb-6 pt-5 text-center" data-reveal="zoom">
+      <Butterfly tone={icon === "font" ? "lavender" : "blush"} size={30} tilt={12} path={3} delay={2} className="bfly-front -right-1 -top-3" />
       <Icon name={icon} size={30} strokeWidth={1.3} className="mx-auto text-gold" />
       <p className="eyebrow mt-2 !text-[0.85rem]">{label}</p>
       <p className="venue-time mt-2 font-display font-medium leading-tight"><span>{time.replace(/\s*(AM|PM)$/i, "")}</span>{" "}<span className="venue-period">{time.match(/(AM|PM)$/i)?.[1]}</span></p>

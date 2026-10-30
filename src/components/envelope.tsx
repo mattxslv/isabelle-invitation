@@ -7,20 +7,23 @@ import { Corner } from "./deco";
 import { Butterfly } from "./butterfly";
 import { Celebration } from "./celebration";
 import { HeartRule, WaxSeal } from "./ornaments";
+import { scrollToLetter } from "@/lib/smooth-scroll";
 
 export function Envelope({ greeting }: { greeting: string }) {
   const [opened, setOpened] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
+  const cancelScroll = useRef<(() => void) | null>(null);
+  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); cancelScroll.current?.(); }, []);
   function open() {
     if (opened) return;
     setOpened(true);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     timer.current = setTimeout(() => {
       const letter = document.getElementById("godparent-letter");
-      letter?.scrollIntoView({ behavior: reduce ? "instant" : "smooth", block: "start" });
       const heading = document.getElementById("letter-heading");
-      heading?.focus({ preventScroll: true });
+      const focus = () => heading?.focus({ preventScroll: true });
+      if (letter && !reduce) cancelScroll.current = scrollToLetter(letter, focus);
+      else { letter?.scrollIntoView({ behavior: "instant", block: "start" }); focus(); }
     }, reduce ? 0 : 1700);
   }
   return (

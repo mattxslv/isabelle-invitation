@@ -97,7 +97,7 @@ export function GodparentResponse({
         </button>
       </div>
       {nameMissing && <p className="text-center text-[0.95rem] text-ink-soft">Add your name first, then choose an answer.</p>}
-      <div role="status" aria-live="polite" className="min-h-[1.5rem] text-center">
+      <div role="status" aria-live="polite" className={state.status === "error" ? "text-center" : "sr-only"}>
         {state.status === "error" && (
           <p role="alert" className="font-medium text-[#9b3d52]">
             {state.message}

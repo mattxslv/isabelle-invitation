@@ -6,6 +6,7 @@ import { rsvpStatusAction, submitRsvpAction, type RsvpState } from "@/app/action
 import { event } from "@/content/event";
 import { isRsvpOpen } from "@/lib/time";
 import { Celebration } from "./celebration";
+import { Butterfly } from "./butterfly";
 import { Lightbox } from "./lightbox";
 import { HeartRule, Icon } from "./ornaments";
 import { fullPhoto, Photo } from "./photo";
@@ -221,10 +222,12 @@ function RsvpConfirmed({
   const name = event.celebrant.shortName;
 
   return (
-    <div className="enter text-center" aria-live="polite">
+    <div className="confirmation-garden enter relative text-center" aria-live="polite">
       {fresh && attending && <Celebration />}
       {attending ? (
         <>
+          <Butterfly tone="lavender" size={38} tilt={-16} path={2} dur={13} appear={0.2} className="bfly-front -left-5 top-[12%]" />
+          <Butterfly tone="blush" size={32} tilt={15} path={4} dur={11} delay={3} appear={0.6} className="bfly-front -right-4 top-[26%]" />
           <div className="mx-auto w-40">
             <Lightbox full={fullPhoto("closing")} alt={`${name} smiling in a pink dress`} label={`Enlarge photo of ${name} smiling`}>
               <span className="block overflow-hidden rounded-b-[1.4rem] rounded-t-full border-[5px] border-paper shadow-[0_20px_40px_-24px_rgb(88_69_54/0.5)] ring-1 ring-gold/40">
@@ -232,8 +235,9 @@ function RsvpConfirmed({
               </span>
             </Lightbox>
           </div>
-          <h3 ref={heading} tabIndex={-1} className="script gold-text mt-5 px-2 pb-1 text-[3.6rem] leading-[1.15] outline-none">
+          <h3 ref={heading} tabIndex={-1} className="script gold-text relative mt-5 px-2 pb-1 text-[3.6rem] leading-[1.15] outline-none">
             {c.heading}!
+            <Butterfly tone="ivory" size={28} tilt={-10} path={1} dur={14} delay={2} appear={0.9} className="bfly-front -right-1 -top-2" />
           </h3>
           <HeartRule className="mt-1" />
           <p className="prose-soft mx-auto mt-4 max-w-[26rem]">Your RSVP is saved. {c.text}</p>

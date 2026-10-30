@@ -8,6 +8,7 @@ import { Lightbox } from "./lightbox";
 import { HeartRule, Icon, IconSprigs } from "./ornaments";
 import { fullPhoto, Photo } from "./photo";
 import { ScrollFx } from "./scroll-fx";
+import { StartupLogo } from "./startup-logo";
 
 export type GodparentMode =
   | { kind: "generic" }
@@ -28,6 +29,7 @@ export function GodparentExperience({ mode }: { mode: GodparentMode }) {
 
   return (
     <main className="garden-page godparent-garden relative">
+      <StartupLogo />
       <GardenHeader letter />
       <ScrollFx />
 

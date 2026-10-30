@@ -9,12 +9,13 @@ import { listRsvps } from "@/lib/rsvp";
 import { requireAdmin } from "@/lib/session";
 import { Dashboard } from "./dashboard";
 import { logoutAction } from "./actions";
+import { MonogramLoader } from "@/components/monogram-loader";
 
 export const metadata: Metadata = { title: "Guest list", referrer: "no-referrer" };
 
 export default function AdminPage() {
   return <main className="admin-page"><div className="admin-shell">
-    <Suspense fallback={<div className="admin-loading" role="status">Loading your guest list...</div>}><AdminContent /></Suspense>
+    <Suspense fallback={<div className="admin-loader-screen"><MonogramLoader label="Loading guest list" /></div>}><AdminContent /></Suspense>
   </div></main>;
 }
 
