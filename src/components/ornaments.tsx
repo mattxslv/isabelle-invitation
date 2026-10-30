@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- local animated SVG assets */
 import type React from "react";
 import type { SVGProps } from "react";
 
@@ -135,7 +134,7 @@ export function HeartRule({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center justify-center gap-3 ${className}`} aria-hidden="true">
       <span className="h-px w-14 bg-gradient-to-r from-transparent to-gold/60" />
-      <span className="imported-loop"><img src="/animations/sparkle.svg" width={20} height={20} alt="" /><Icon name="heart" size={16} className="motion-still text-gold" /></span>
+      <Icon name="heart" size={16} className="text-gold" />
       <span className="h-px w-14 bg-gradient-to-l from-transparent to-gold/60" />
     </div>
   );

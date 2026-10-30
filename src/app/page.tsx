@@ -69,7 +69,6 @@ function Hero() {
                 <GoldFrame className="portrait-frame" />
               </span>
             </Lightbox>
-            <span className="first-year-badge"><span className="script">one</span><span>sweet year</span></span>
           </div>
         </div>
 
@@ -236,7 +235,7 @@ function Reception() {
         </div>
         <div data-scene="enter" className="mt-7">
           <figure className="scene-rise relative m-0">
-            <Lightbox full={{avif:"/venues/st-bernard-photo.avif",webp:"/venues/st-bernard-photo.webp",width:1200,height:733}} alt="St. Bernard Subdivision entrance" label="Enlarge the St. Bernard entrance photo"><span className="venue-landmark"><img src="/venues/st-bernard-photo.webp" alt="Actual entrance to St. Bernard Subdivision, with its yellow guardhouse and iron gates" width={1200} height={733} loading="lazy" /></span></Lightbox>
+            <Lightbox full={{avif:"/venues/st-bernard-clean.avif",webp:"/venues/st-bernard-clean.webp",width:1200,height:762}} alt="St. Bernard Subdivision entrance" label="Enlarge the St. Bernard entrance photo"><span className="venue-landmark"><img src="/venues/st-bernard-clean.webp" alt="Actual entrance to St. Bernard Subdivision, with its yellow guardhouse and iron gates" width={1200} height={762} loading="lazy" /></span></Lightbox>
             <Butterfly tone="blush" size={34} tilt={-8} path={3} dur={9} flap={2.6} delay={1} appear={1.6} className="right-[30%] top-[4%]" />
             <figcaption className="eyebrow mt-3 text-center !text-[0.78rem] !tracking-[0.2em]">{r.landmark}</figcaption>
           </figure>
