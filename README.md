@@ -5,10 +5,10 @@ Mobile-first watercolor invitation with private RSVPs, a godparent letter, and a
 | Route | What it is |
 | --- | --- |
 | `/` | The invitation: hero and countdown, christening, reception, details, RSVP, thank you |
-| `/godparents` | Scroll-opened envelope letter, generic "Will you be my godparent?" |
+| `/godparents` | Tap-opened envelope letter, generic "Will you be my godparent?" |
 | `/godparents/ninang`, `/godparents/ninong` | Same letter, addressed to a Ninang or Ninong |
-| `/godparents/invite/<token>` | Private personal link that greets someone by name (created in the dashboard) |
-| `/admin` | Family-only dashboard: RSVP counts, search, delete, godparent answers, personal links |
+| `/godparents/invite/<token>` | Existing personal invitation link that greets someone by name |
+| `/admin` | Admin dashboard: attendance counts, search, filters, removal, and godparent answers |
 
 All event facts and copy live in **`src/content/event.ts`**.
 
@@ -16,6 +16,8 @@ All event facts and copy live in **`src/content/event.ts`**.
 
 Next.js 16 (App Router, Cache Components), TypeScript, Tailwind CSS 4, Zod, Neon Postgres.
 Local development and tests use PGlite (Postgres compiled to WASM), so the same SQL runs everywhere.
+
+The live invitation is available at https://isabelle-invitation.vercel.app.
 
 ## Getting started
 

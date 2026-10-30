@@ -50,5 +50,3 @@ next-env.d.ts
 # allow the example env file
 !.env.example
 
-.vercel
-.env*
