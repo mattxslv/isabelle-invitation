@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { event } from "@/content/event";
 import { getDb } from "@/lib/db";
 import { listResponses } from "@/lib/godparents";
@@ -9,7 +10,7 @@ import { requireAdmin } from "@/lib/session";
 import { Dashboard } from "./dashboard";
 import { logoutAction } from "./actions";
 
-export const metadata: Metadata = { title: "Family guest list", referrer: "no-referrer" };
+export const metadata: Metadata = { title: "Guest list", referrer: "no-referrer" };
 
 export default function AdminPage() {
   return <main className="admin-page"><div className="admin-shell">
@@ -18,12 +19,13 @@ export default function AdminPage() {
 }
 
 async function AdminContent() {
+  await connection();
   await requireAdmin();
   const db = await getDb();
   const [rsvps, responses] = await Promise.all([listRsvps(db), listResponses(db)]);
   return <>
     <header className="admin-header">
-      <div><p className="admin-eyebrow">Isabelle&rsquo;s celebration</p><h1>Guest list</h1><p className="admin-event-date">{event.dateLong} <span aria-hidden="true">&middot;</span> Family dashboard</p></div>
+      <div className="admin-brand"><Link className="garden-monogram admin-monogram" href="/" aria-label="Isabelle's invitation">I<span aria-hidden="true">&#10023;</span></Link><div><p className="admin-eyebrow">Isabelle&rsquo;s celebration</p><h1>Guest list</h1><p className="admin-event-date">{event.dateLong}</p></div></div>
       <form action={logoutAction}><button type="submit" className="admin-signout"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><path d="M9 4H5v16h4M14 8l4 4-4 4M8 12h10" strokeLinecap="round" strokeLinejoin="round" /></svg>Sign out</button></form>
     </header>
     <div className="admin-intro"><p>See who&rsquo;s celebrating with Isabelle.</p><Link href="/" target="_blank">View invitation <span aria-hidden="true">&#8599;</span></Link></div>

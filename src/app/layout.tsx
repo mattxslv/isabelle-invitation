@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans, Pinyon_Script } from "next/font/google";
 import "./globals.css";
+import "./finishing.css";
 
 const display = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -42,7 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: JS_FLAG }} />
       </head>
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

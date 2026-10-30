@@ -1255,7 +1255,7 @@ html:not(.js) .gp-scene[data-scene] {
 .invitation-reply .choice .dot { position:absolute; left:1rem; top:50%; translate:0 -50%; }
 .reply-choice-copy { align-items:center; text-align:center; }
 .edge-bouquet.edge-spray { width:clamp(115px,29vw,205px); rotate:-10deg; }
-.edge-bouquet.edge-corner { width:clamp(85px,22vw,165px); rotate:9deg; }
+.edge-bouquet.edge-compact { width:clamp(85px,22vw,165px); rotate:9deg; }
 .garden-rsvp .edge-bouquet.edge-spray { rotate:14deg; width:clamp(100px,26vw,180px); }
 
 /* A clear, quiet family dashboard, separate from the decorative invitation. */
@@ -1271,11 +1271,6 @@ html:not(.js) .gp-scene[data-scene] {
 .admin-intro a { color:#76548e; text-decoration:none; white-space:nowrap; }
 .admin-intro a:hover { text-decoration:underline; }
 .admin-dashboard { display:grid; gap:1.5rem; }
-.admin-preview { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.9rem 1.1rem; border:1px solid #ded1e6; border-radius:1rem; background:#fffdfb; }
-.admin-preview.is-sample { background:#f0e8f7; border-style:dashed; border-color:#c3a7d6; }
-.admin-preview-title { font-size:.82rem; font-weight:600; color:#705088; }
-.admin-preview p { font-size:.73rem; color:#7f6c88; margin-top:.15rem; }
-.admin-preview button { flex:none; background:#fffdfb; padding:.6rem .75rem; border:1px solid #d1bddf; border-radius:.65rem; color:#6b4f82; font-size:.72rem; cursor:pointer; }
 .admin-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.8rem; }
 .admin-stat { position:relative; border:1px solid #e1d5e8; border-radius:1.1rem; padding:1.15rem; background:#fffdfb; box-shadow:0 10px 24px -19px #7c558f77; }
 .admin-stat-icon { display:grid; place-items:center; width:2rem; height:2rem; border-radius:.65rem; background:#eee4f6; color:#84619a; margin-bottom:.65rem; }
@@ -1324,7 +1319,6 @@ html:not(.js) .gp-scene[data-scene] {
  .admin-signout { font-size:.7rem; padding:.5rem .65rem; min-height:2.5rem; }
  .admin-intro { align-items:flex-start; font-size:.72rem; }
  .admin-intro p { max-width:12rem; }
- .admin-preview { flex-direction:column; align-items:flex-start; gap:.6rem; }
  .admin-stats { gap:.5rem; }
  .admin-stat { padding:.9rem .75rem; }
  .admin-stat dt { font-size:.65rem; }

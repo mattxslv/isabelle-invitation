@@ -55,8 +55,8 @@ export const event = {
     dressCode: {
       heading: "Dress Code",
       rows: [
-        { who: "Guests", what: "Casual attire" },
-        { who: "Ninangs & Ninongs", what: "Semi-formal attire" },
+        { who: "Guests", what: "Casual attire in pastel colors" },
+        { who: "Ninangs & Ninongs", what: "White semi-formal attire" },
       ],
       note: "We kindly ask everyone to avoid wearing pink.",
     },

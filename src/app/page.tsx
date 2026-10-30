@@ -178,6 +178,7 @@ function Christening() {
   return (
     <section id="christening" className="garden-chapter relative pb-14 pt-20" aria-labelledby="christening-heading">
       <GardenLights />
+      <Butterfly tone="ivory" size={30} tilt={12} path={2} delay={3} className="right-[6%] top-2" />
       <EdgeBouquet side="left" tone="lavender">
         <Butterfly tone="periwinkle" size={36} tilt={-10} path={4} dur={11} flap={3} delay={2} appear={0.8} className="left-[78%] -top-[2%]" />
       </EdgeBouquet>
@@ -206,6 +207,7 @@ function Reception() {
   return (
     <section id="reception" className="garden-chapter relative pb-14 pt-20" aria-labelledby="reception-heading">
       <GardenLights />
+      <Butterfly tone="periwinkle" size={30} tilt={-15} path={1} delay={5} className="left-[5%] top-2" />
       <EdgeBouquet side="right" tone="blush" arrangement="spray">
         <Butterfly tone="lavender" size={40} tilt={12} path={2} dur={12} flap={3.3} delay={4} appear={1} className="right-[78%] -top-[2%]" />
       </EdgeBouquet>
@@ -265,7 +267,8 @@ function Details() {
   const d = event.details;
   return (
     <section id="details" className="garden-details relative pb-14 pt-20" aria-labelledby="details-heading">
-      <EdgeBouquet side="left" tone="blush" arrangement="corner">
+      <Butterfly tone="blush" size={32} tilt={8} path={3} delay={2} className="right-[5%] top-3" />
+      <EdgeBouquet side="left" tone="blush" arrangement="compact">
         <Butterfly tone="ivory" size={36} tilt={-6} path={1} dur={14} flap={3.6} delay={5} appear={1.4} className="left-[78%] top-0" />
       </EdgeBouquet>
       <Column>

@@ -31,6 +31,7 @@ export function Envelope({ greeting }: { greeting: string }) {
         <Corner pos="tl" eager width="clamp(110px, 30vw, 18rem)" />
         <Butterfly tone="lavender" size={36} className="left-[12%] bottom-[15%]" />
         <Butterfly tone="blush" size={36} className="right-[12%] bottom-[20%]" />
+        <Butterfly tone="ivory" size={30} tilt={14} path={3} delay={3} className="right-[9%] top-[34%]" />
         <div className="gp-intro px-6">
           <p className="script gold-text text-[clamp(2.6rem,11vw,3.4rem)] leading-[1.2]">{godparents.eyebrow}</p>
           <p className="eyebrow mt-3">For my {greeting}</p>

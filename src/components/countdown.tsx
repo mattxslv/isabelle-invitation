@@ -38,7 +38,7 @@ export function Countdown() {
       <div className="countdown" aria-hidden="true">
         {cells.map((cell) => (
           <div key={cell.label}>
-            <span className="num">{cell.value}</span>
+            <span className="num countdown-number-window"><span key={cell.value} className="countdown-number">{cell.value}</span></span>
             <span className="unit">{cell.label}</span>
           </div>
         ))}

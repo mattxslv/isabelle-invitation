@@ -1,4 +1,5 @@
 "use client";
+import { capitalizeName } from "@/lib/name-format";
 
 import { startTransition, useActionState, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { rsvpStatusAction, submitRsvpAction, type RsvpState } from "@/app/actions";
@@ -112,6 +113,7 @@ export function RsvpForm() {
         e.preventDefault();
         if (!ready || pending) return;
         const formData = new FormData(e.currentTarget);
+        formData.set("name", capitalizeName(name.trim()));
         key.current ??= crypto.randomUUID();
         formData.set("submissionKey", key.current);
         startTransition(() => formAction(formData));
@@ -132,6 +134,7 @@ export function RsvpForm() {
           name="name"
           className="field"
           autoComplete="name"
+          autoCapitalize="words"
           maxLength={100}
           required
           value={name}

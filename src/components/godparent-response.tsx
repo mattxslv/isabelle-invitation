@@ -1,4 +1,5 @@
 "use client";
+import { capitalizeName } from "@/lib/name-format";
 
 import Link from "next/link";
 import { startTransition, useActionState, useEffect, useRef, useState } from "react";
@@ -41,6 +42,7 @@ export function GodparentResponse({
   const submit = (decision: "accept" | "decline", form: HTMLFormElement) => {
     if (nameMissing || pending) return;
     const formData = new FormData(form);
+    if (needsName) formData.set("name", capitalizeName(name.trim()));
     if (key.current === null || choice !== decision) key.current = crypto.randomUUID();
     setChoice(decision);
     formData.set("decision", decision);
@@ -70,6 +72,7 @@ export function GodparentResponse({
             name="name"
             className="field"
             autoComplete="name"
+            autoCapitalize="words"
             maxLength={100}
             value={name}
             onChange={(e) => {

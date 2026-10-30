@@ -67,8 +67,8 @@ export function Corner({
 
 // Bouquet growing in from the left or right page edge, straddling the top of
 // its section so it sits in the gap between sections, never beside text.
-export function EdgeBouquet({ side, tone = "blush", arrangement = "edge", children }: { side: "left" | "right"; tone?: "blush" | "lavender"; arrangement?: "edge" | "spray" | "corner"; children?: ReactNode }) {
-  const art: ArtName = arrangement === "corner" ? "corner" : arrangement === "spray" ? `spray-${tone}` : `edge-${tone}`;
+export function EdgeBouquet({ side, tone = "blush", arrangement = "edge", children }: { side: "left" | "right"; tone?: "blush" | "lavender"; arrangement?: "edge" | "spray" | "compact"; children?: ReactNode }) {
+  const art: ArtName = arrangement === "compact" ? "spray-lavender" : arrangement === "spray" ? `spray-${tone}` : `edge-${tone}`;
   return (
     <div className={`deco edge-bouquet edge-${arrangement} sway sway-${side === "left" ? "l" : "r"}`} style={{ [side]: -6 }} aria-hidden="true">
       <div className={`bloom-${side} ${side === "right" ? "mirror-x" : ""}`} data-reveal="bloom">
@@ -83,8 +83,8 @@ export function EdgeBouquet({ side, tone = "blush", arrangement = "edge", childr
 export function Garland({ className = "", children }: { className?: string; children?: ReactNode }) {
   const [width, height] = SIZES.garland;
   return (
-    <div className={`floral-footer relative select-none ${className}`} aria-hidden="true">
-      <div className="floral-garland" data-reveal="floral">
+    <div className={`floral-footer relative select-none ${className}`} data-reveal="garland" aria-hidden="true">
+      <div className="floral-garland">
       {/* eslint-disable-next-line @next/next/no-img-element -- static pre-rendered art */}
       <img
         src="/art/garland.webp"
