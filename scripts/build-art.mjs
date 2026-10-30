@@ -572,63 +572,88 @@ function petal(pal, seed, kind = "petal") {
     </g></svg>`;
 }
 
-// --- reception: painterly garden arch -------------------------------------
+// --- reception landmark: St. Bernard Subdivision entrance (painted) --------
 
-function receptionScene() {
-  rand = mulberry32(77);
+function shrubs(x0, x1, y, r = 18) {
+  let body = "";
+  let d = "";
+  for (let x = x0; x <= x1; x += r * between(1.3, 1.8)) {
+    const rr = r * between(0.8, 1.15);
+    const g = radial(x - rr * 0.3, y - rr * 0.4, rr * 1.4, [[0, LEAF[0]], [0.5, LEAF[1]], [1, LEAF[3]]]);
+    d += g.def;
+    body += `<circle cx="${f(x)}" cy="${f(y - rr * between(0.4, 0.9))}" r="${f(rr)}" fill="url(#${g.gid})"/>`;
+    if (rand() > 0.5) body += `<circle cx="${f(x + rr * 0.5)}" cy="${f(y - rr * 1.3)}" r="${f(rr * 0.7)}" fill="url(#${g.gid})"/>`;
+  }
+  return { defs: d, body: `<g filter="url(#wc)">${body}</g>` };
+}
+
+function gateScene() {
+  rand = mulberry32(91);
   const W = 1000;
-  const H = 720;
-  const cx = 500;
-  const base = 600;
-  const parts = [wash(500, 400, 230, "#E9DDF4", 0.45), wash(500, 650, 380, "#D6E6CE", 0.55)];
-  for (const [x, y, r] of [[170, 450, 85], [260, 410, 70], [830, 450, 85], [740, 410, 70], [90, 520, 70], [910, 520, 70]]) {
-    parts.push(wash(x, y, r, pick(["#C3D6B6", "#CBD9C8", "#B8CEAD"]), 0.6));
+  const H = 620;
+  const INK2 = "#7A5A40";
+  const parts = [wash(500, 170, 420, "#E7EEF8", 0.75), wash(300, 140, 220, "#EFE6F7", 0.45), wash(800, 160, 200, "#F6E3EA", 0.35)];
+  // distant trees along the road
+  for (const [x, y, r] of [[60, 370, 70], [140, 350, 60], [210, 380, 50], [900, 380, 60], [970, 360, 70]]) {
+    parts.push(wash(x, y, r, pick(["#BFD4B2", "#AFC8A3", "#C6D8BB"]), 0.75));
   }
-  parts.push({ defs: "", body: `<path d="M455 ${base - 40} L545 ${base - 40} L640 ${H} L360 ${H} Z" fill="#F4E8D6" opacity="0.9" filter="url(#wc)"/>` });
-  const R = 230;
-  const archY = base - 40;
-  for (let a = 180; a <= 360; a += 7) {
-    const rad = (a * Math.PI) / 180;
-    const x = cx + Math.cos(rad) * R;
-    const y = archY + Math.sin(rad) * R * 1.12;
-    parts.push(leaf(x + between(-10, 10), y + between(-10, 10), a + 90 + between(-40, 40), between(44, 64), 20, rand() > 0.5 ? LEAF : EUCA));
-    parts.push(leaf(x + between(-10, 10), y + between(-10, 10), a - 90 + between(-40, 40), between(40, 58), 18));
-  }
-  let lights = "";
-  for (const [x0, x1, sag, y0] of [[300, 700, 70, 400], [330, 670, 50, 450]]) {
-    lights += `<path d="M ${x0} ${y0} Q ${cx} ${y0 + sag * 2} ${x1} ${y0}" stroke="#B18B5C" stroke-width="1.2" fill="none" opacity="0.55"/>`;
-    for (let t = 0.06; t < 1; t += 0.09) {
-      const x = x0 + (x1 - x0) * t;
-      const y = y0 + sag * 4 * t * (1 - t);
-      lights += `<circle cx="${f(x)}" cy="${f(y + 5)}" r="11" fill="#F7E3B0" opacity="0.35" filter="url(#soft)"/><circle cx="${f(x)}" cy="${f(y + 5)}" r="3.6" fill="#F6DC9C"/>`;
-    }
-  }
-  parts.push({ defs: "", body: lights });
-  for (let a = 182; a <= 358; a += 11) {
-    const rad = (a * Math.PI) / 180;
-    const x = cx + Math.cos(rad) * R;
-    const y = archY + Math.sin(rad) * R * 1.12;
-    const k = Math.round(a / 11) % 4;
-    if (k === 0) parts.push(rose(x, y, between(30, 38), pick([PAL.blush, PAL.rose])));
-    else if (k === 1) parts.push(cosmos(x, y, between(26, 32), pick([PAL.lavender, PAL.lilac])));
-    else if (k === 2) parts.push(hydrangea(x, y, between(26, 32), PAL.lilac));
-    else parts.push(rose(x, y, between(26, 32), PAL.lavender));
-  }
-  for (const side of [-1, 1]) {
-    const bx = cx + side * R;
-    parts.push(...nest(bx, base - 10, 90, 8));
-    parts.push(rose(bx, base - 30, 62, side < 0 ? PAL.blush : PAL.lavender));
-    parts.push(hydrangea(bx + side * 70, base + 10, 52, PAL.lilac));
-    parts.push(cosmos(bx - side * 60, base + 20, 44, side < 0 ? PAL.lavender : PAL.blush));
-    parts.push(bud(bx + side * 30, base - 120, 30, PAL.rose, side * 20));
-  }
-  for (let x = 120; x < 900; x += 46) {
-    if (Math.abs(x - cx) < 110) continue;
-    parts.push(leaf(x, base + 70, between(-40, 40), 34, 13));
-    parts.push(rose(x + between(-8, 8), base + 60 + between(-6, 6), between(13, 18), pick([PAL.blush, PAL.lavender, PAL.rose, PAL.lilac])));
-  }
-  parts.push(sparkles(36, [200, 200, 800, 560]));
-  return svg(W, H, parts, "", { l: 0.14, r: 0.14, t: 0.18, b: 0.12 });
+  const yellow = linear(0, 240, 0, 520, [[0, "#F7DC8E"], [1, "#EDC468"]]);
+  const peach = linear(0, 370, 0, 530, [[0, "#E2B184"], [1, "#CF9767"]]);
+  const roof = linear(0, 214, 0, 252, [[0, "#9A463E"], [0.45, "#86352F"], [0.5, "#FBF4E8"], [1, "#EEE2CF"]]);
+  // ground and road
+  let fill = `<path d="M0 515 C 250 505 650 500 1000 508 L1000 620 L0 620 Z" fill="#EEE5D6"/>
+    <path d="M0 540 C 300 530 700 528 1000 536" stroke="#E0D3BE" stroke-width="3" fill="none"/>`;
+  // small guardhouse behind the sign wall
+  fill += `<rect x="236" y="336" width="124" height="78" fill="url(#${yellow.gid})"/>
+    <rect x="216" y="318" width="164" height="20" fill="url(#${roof.gid})"/>
+    <rect x="268" y="356" width="26" height="30" fill="#4A4542" opacity="0.85"/>`;
+  // sign wall with lettering band and planter
+  fill += `<rect x="140" y="410" width="340" height="92" fill="url(#${yellow.gid})"/>
+    <rect x="132" y="402" width="356" height="10" fill="#F4E0A6"/>
+    <rect x="150" y="500" width="320" height="18" fill="#F1DFA8"/>`;
+  // gate pillars
+  fill += `<rect x="478" y="360" width="22" height="160" fill="url(#${peach.gid})"/><rect x="628" y="360" width="22" height="160" fill="url(#${peach.gid})"/>`;
+  // main guardhouse
+  fill += `<rect x="690" y="250" width="172" height="122" fill="url(#${yellow.gid})"/>
+    <rect x="690" y="372" width="172" height="150" fill="url(#${peach.gid})"/>
+    <rect x="642" y="214" width="262" height="38" fill="url(#${roof.gid})"/>
+    <rect x="742" y="276" width="36" height="66" fill="#3F3B3A" opacity="0.88"/>
+    <rect x="770" y="402" width="52" height="82" fill="#3F3B3A" opacity="0.85"/>
+    <ellipse cx="770" cy="530" rx="112" ry="16" fill="#C99A70" opacity="0.8"/>`;
+  parts.push({ defs: yellow.def + peach.def + roof.def, body: `<g filter="url(#wc)">${fill}</g>` });
+
+  // ink linework
+  let ink = `<g fill="none" stroke="${INK2}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" filter="url(#line)">
+    <path d="M236 414 L236 336 L360 336 L360 414 M216 318 L380 318 L380 338 L216 338 Z"/>
+    <path d="M140 502 L140 410 L480 410 M132 402 L488 402 L488 412 L132 412 Z M150 518 L470 518"/>
+    <path d="M478 520 L478 360 L500 360 L500 520 M628 520 L628 360 L650 360 L650 520"/>
+    <path d="M690 522 L690 252 M862 252 L862 522 M690 372 L862 372 M642 214 L904 214 L904 252 L642 252 Z M642 226 L904 226"/>
+    <rect x="742" y="276" width="36" height="66"/><rect x="770" y="402" width="52" height="82"/>
+    <path d="M783 402 L783 484 M796 402 L796 484 M809 402 L809 484 M770 443 L822 443"/>
+  </g>`;
+  // arched wrought-iron gate between the pillars
+  ink += `<g stroke="#6B4636" stroke-width="2.6" fill="none" stroke-linecap="round">`;
+  const top = (x) => 392 - 34 * Math.sin((Math.PI * (x - 500)) / 128);
+  let arch = "M500 392";
+  for (let x = 504; x <= 628; x += 4) arch += ` L${x} ${f(top(x))}`;
+  ink += `<path d="${arch}"/><path d="M500 470 L628 470 M500 512 L628 512"/>`;
+  for (let x = 508; x < 628; x += 11) ink += `<path d="M${x} 512 L${x} ${f(top(x) + 2)}"/>`;
+  for (let x = 512; x < 628; x += 16) ink += `<circle cx="${x}" cy="454" r="5"/>`;
+  ink += `</g>`;
+  // lettering
+  ink += `<text x="310" y="468" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="25" letter-spacing="2" fill="#5E4330">ST. BERNARD SUBD.</text>`;
+  parts.push({ defs: "", body: ink });
+
+  parts.push(shrubs(150, 470, 506, 17), shrubs(680, 870, 534, 21), shrubs(520, 610, 520, 12));
+  // watercolor florals framing the scene, tying it into the invitation
+  parts.push(...nest(70, 585, 100, 7), ...nest(930, 585, 100, 7));
+  parts.push(hydrangea(150, 580, 46, PAL.lilac), cosmos(40, 560, 52, PAL.lavender), rose(95, 600, 64, PAL.blush));
+  parts.push(cosmos(860, 590, 44, PAL.blush), hydrangea(965, 560, 46, PAL.lilac), rose(915, 600, 62, PAL.lavender));
+  parts.push(bud(190, 520, 30, PAL.rose, 20), bud(820, 525, 28, PAL.lavender, -20));
+  parts.push(sparkles(18, [80, 80, 920, 420]));
+  // Drop the empty sky: shift the painting up into a shorter canvas.
+  const shifted = parts.map((p) => ({ defs: p.defs, body: `<g transform="translate(0 -110)">${p.body}</g>` }));
+  return svg(W, H - 110, shifted, "", { l: 0.06, r: 0.06, t: 0.14, b: 0.04 });
 }
 
 // ---------------------------------------------------------------------------
@@ -640,7 +665,7 @@ const ART = [
   ["garland", garland(), 80],
   ["edge-blush", edge(31, PAL.blush, PAL.lavender), 82],
   ["edge-lavender", edge(37, PAL.lavender, PAL.rose), 82],
-  ["reception", receptionScene(), 82],
+  ["gate", gateScene(), 84],
 ];
 
 for (const [name, markup, quality] of ART) {

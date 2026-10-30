@@ -490,7 +490,7 @@ body {
 /* Sits in the gap above a section's content, flush with the page edge. */
 .edge-bouquet {
   top: -3.75rem;
-  width: clamp(84px, 24vw, 230px);
+  width: clamp(100px, 29vw, 240px);
 }
 
 /* ------------------------------------------------------- entrance + reveal */
@@ -558,6 +558,94 @@ body {
 }
 .js [data-reveal-stagger].is-in > :nth-child(5) {
   transition-delay: 360ms;
+}
+
+/* Reveal variants (one-shot, triggered as each element scrolls into view). */
+.js [data-reveal="left"]:not(.is-in) {
+  transform: translate3d(-36px, 10px, 0);
+}
+
+.js [data-reveal="right"]:not(.is-in) {
+  transform: translate3d(36px, 10px, 0);
+}
+
+.js [data-reveal="zoom"]:not(.is-in) {
+  transform: translate3d(0, 18px, 0) scale(0.92);
+}
+
+.js [data-reveal="unveil"] {
+  transition:
+    clip-path 1.2s var(--ease-soft),
+    opacity 900ms var(--ease-soft),
+    transform 1.2s var(--ease-soft);
+}
+
+.js [data-reveal="unveil"]:not(.is-in) {
+  clip-path: inset(10% 10% 10% 10% round 1.4rem);
+  transform: scale(1.04);
+}
+
+.js [data-reveal="unveil"].is-in {
+  clip-path: inset(0 0 0 0 round 1.4rem);
+}
+
+/* Edge bouquets bloom open from the page edge. */
+.js [data-reveal="bloom"] {
+  transition:
+    opacity 1.2s var(--ease-soft),
+    transform 1.4s var(--ease-soft);
+}
+
+.js .bloom-left[data-reveal="bloom"]:not(.is-in) {
+  transform-origin: 0 50%;
+  transform: scale(0.55) rotate(-10deg);
+}
+
+.js .bloom-right[data-reveal="bloom"]:not(.is-in) {
+  transform-origin: 100% 50%;
+  transform: scale(0.55) rotate(10deg);
+}
+
+/* Gold sprigs beside section icons grow outward. */
+.sprig {
+  display: inline-flex;
+  transition: transform 1s var(--ease-soft) 150ms;
+}
+
+.sprig-l {
+  transform-origin: 100% 50%;
+}
+
+.sprig-r {
+  transform-origin: 0% 50%;
+}
+
+.js [data-reveal-stagger]:not(.is-in) .sprig {
+  transform: scaleX(0);
+}
+
+/* Hero sprays drift apart a little as the portrait scrolls away. */
+.spray-drift-l {
+  translate: calc(var(--p, 0) * -28px) calc(var(--p, 0) * 16px);
+}
+
+.spray-drift-r {
+  translate: calc(var(--p, 0) * 28px) calc(var(--p, 0) * -12px);
+}
+
+/* Butterflies stand out from the flowers they rest near. */
+.bfly .bfly-body {
+  filter: drop-shadow(0 0 2px rgb(255 255 255 / 0.95)) drop-shadow(0 0 6px rgb(255 253 248 / 0.8))
+    drop-shadow(0 4px 5px rgb(88 69 54 / 0.22));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal="unveil"]:not(.is-in) {
+    clip-path: none;
+  }
+  .js [data-reveal-stagger]:not(.is-in) .sprig {
+    transform: none;
+  }
 }
 
 /* Scroll-linked scenes: JS writes --p (0 to 1). Without JS, show final state. */

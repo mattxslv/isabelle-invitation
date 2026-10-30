@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 
-export type ArtName = "corner" | "spray-blush" | "spray-lavender" | "garland" | "edge-blush" | "edge-lavender" | "reception";
+export type ArtName = "corner" | "spray-blush" | "spray-lavender" | "garland" | "edge-blush" | "edge-lavender" | "gate";
 
 const SIZES: Record<ArtName, [number, number]> = {
   corner: [640, 640],
@@ -9,7 +9,7 @@ const SIZES: Record<ArtName, [number, number]> = {
   garland: [1500, 460],
   "edge-blush": [360, 420],
   "edge-lavender": [360, 420],
-  reception: [1000, 490],
+  gate: [1000, 510],
 };
 
 function Art({ art, eager = false }: { art: ArtName; eager?: boolean }) {
@@ -70,7 +70,7 @@ export function Corner({
 export function EdgeBouquet({ side, tone = "blush", children }: { side: "left" | "right"; tone?: "blush" | "lavender"; children?: ReactNode }) {
   return (
     <div className={`deco edge-bouquet sway sway-${side === "left" ? "l" : "r"}`} style={{ [side]: -6 }} aria-hidden="true">
-      <div className={side === "right" ? "mirror-x" : ""}>
+      <div className={`bloom-${side} ${side === "right" ? "mirror-x" : ""}`} data-reveal="bloom">
         <Art art={tone === "blush" ? "edge-blush" : "edge-lavender"} />
       </div>
       {children}
@@ -99,7 +99,7 @@ export function Garland({ className = "", children }: { className?: string; chil
   );
 }
 
-export function Illustration({ art, className = "" }: { art: "reception"; className?: string }) {
+export function Illustration({ art, className = "" }: { art: "gate"; className?: string }) {
   const [width, height] = SIZES[art];
   return (
     // eslint-disable-next-line @next/next/no-img-element -- static pre-rendered art
@@ -138,21 +138,29 @@ export function ChurchPhoto() {
           />
         </picture>
       </span>
-      <figcaption className="mt-2 text-center text-[0.75rem] text-ink-soft/80">
-        Photo:{" "}
-        <a
-          className="underline underline-offset-2"
-          href="https://commons.wikimedia.org/wiki/File:01010ajfSaint_Michael_Archangel_Parish_Church_Tarlac_Cityfvf_05.jpg"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Judgefloro
-        </a>
-        ,{" "}
-        <a className="underline underline-offset-2" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">
-          CC BY-SA 4.0
-        </a>
-      </figcaption>
     </figure>
+  );
+}
+
+// License attribution for the church photo (CC BY-SA 4.0 requires credit).
+// Kept discreet in the page footer rather than under the photo.
+export function PhotoCredit() {
+  return (
+    <p className="px-6 pb-6 pt-2 text-center text-[0.7rem] text-ink-soft/70">
+      Church photo by{" "}
+      <a
+        className="underline underline-offset-2"
+        href="https://commons.wikimedia.org/wiki/File:01010ajfSaint_Michael_Archangel_Parish_Church_Tarlac_Cityfvf_05.jpg"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Judgefloro
+      </a>{" "}
+      (
+      <a className="underline underline-offset-2" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">
+        CC BY-SA 4.0
+      </a>
+      )
+    </p>
   );
 }

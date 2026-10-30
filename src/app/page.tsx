@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { event } from "@/content/event";
 import { Butterfly } from "@/components/butterfly";
 import { Countdown } from "@/components/countdown";
-import { ChurchPhoto, Corner, Deco, EdgeBouquet, Garland, Illustration } from "@/components/deco";
+import { ChurchPhoto, Corner, Deco, EdgeBouquet, Garland, Illustration, PhotoCredit } from "@/components/deco";
 import { Lightbox } from "@/components/lightbox";
 import { Flourish, GoldFrame, HeartRule, Icon, IconSprigs, type IconName } from "@/components/ornaments";
 import { fullPhoto, Photo } from "@/components/photo";
@@ -20,6 +20,7 @@ export default function InvitationPage() {
       <Reception />
       <Details />
       <Rsvp />
+      <PhotoCredit />
     </main>
   );
 }
@@ -31,10 +32,10 @@ function Hero() {
   return (
     <section className="relative overflow-hidden pb-14 pt-[6.75rem] sm:pt-32" data-scene="exit" aria-labelledby="hero-name">
       <Corner pos="tl" eager width="clamp(150px, 44vw, 24rem)">
-        <Butterfly tone="lavender" size={44} tilt={-12} path={1} dur={12} flap={3.4} appear={1.2} className="left-[62%] top-[30%]" />
+        <Butterfly tone="lavender" size={44} tilt={-12} path={1} dur={12} flap={3.4} appear={1.2} className="left-[90%] top-[4%]" />
       </Corner>
       <Corner pos="tr" eager width="clamp(140px, 40vw, 21rem)">
-        <Butterfly tone="blush" size={38} tilt={14} path={2} dur={10} flap={2.8} delay={1.5} appear={2.1} className="right-[56%] top-[34%]" />
+        <Butterfly tone="blush" size={38} tilt={14} path={2} dur={10} flap={2.8} delay={1.5} appear={2.1} className="right-[96%] top-[24%]" />
       </Corner>
 
       <div className="layer mx-auto max-w-[30rem] px-6 text-center">
@@ -45,9 +46,9 @@ function Hero() {
 
         <div className="enter relative mx-auto mt-7 w-fit" style={delay(300)}>
           <div className="scene-exit relative">
-            <Deco art="spray-blush" eager className="-bottom-[14%] -left-[38%] w-[95%] -rotate-12" />
-            <Deco art="spray-lavender" eager className="-right-[38%] -top-[10%] w-[85%] rotate-[168deg]" />
-            <Butterfly tone="ivory" size={36} tilt={-20} path={3} dur={13} flap={3.8} delay={3} appear={3.4} className="-left-[16%] bottom-[2%]" />
+            <Deco art="spray-blush" eager className="spray-drift-l -bottom-[14%] -left-[38%] w-[95%] -rotate-12" />
+            <Deco art="spray-lavender" eager className="spray-drift-r -right-[38%] -top-[10%] w-[85%] rotate-[168deg]" />
+            <Butterfly tone="periwinkle" size={36} tilt={-20} path={3} dur={13} flap={3.8} delay={3} appear={3.4} className="-left-[9%] bottom-[26%]" />
             <Lightbox
               full={fullPhoto("hero")}
               alt={`Portrait of ${c.shortName} in a white dress and bow`}
@@ -133,7 +134,7 @@ function VenueCard({
   mapUrl: string;
 }) {
   return (
-    <div className="card relative z-[1] px-6 pb-6 pt-5 text-center" data-reveal>
+    <div className="card relative z-[1] px-6 pb-6 pt-5 text-center" data-reveal="zoom">
       <Icon name={icon} size={30} strokeWidth={1.3} className="mx-auto text-gold" />
       <p className="eyebrow mt-2 !text-[0.85rem]">{label}</p>
       <p className="mt-1 font-display text-[2rem] font-medium leading-tight">{time}</p>
@@ -164,13 +165,15 @@ function Christening() {
   return (
     <section className="relative pb-14 pt-20" aria-labelledby="christening-heading">
       <EdgeBouquet side="left" tone="lavender">
-        <Butterfly tone="periwinkle" size={36} tilt={-10} path={4} dur={11} flap={3} delay={2} appear={0.8} className="left-[56%] top-[4%]" />
+        <Butterfly tone="periwinkle" size={36} tilt={-10} path={4} dur={11} flap={3} delay={2} appear={0.8} className="left-[78%] -top-[2%]" />
       </EdgeBouquet>
       <Column>
         <SectionIntro icon="cross" id="christening-heading" heading={c.heading} text={c.text} />
         <div data-scene="enter" className="mt-7">
           <div className="scene-rise">
-            <ChurchPhoto />
+            <div data-reveal="unveil">
+              <ChurchPhoto />
+            </div>
           </div>
         </div>
         <div className="mt-6">
@@ -189,7 +192,7 @@ function Reception() {
   return (
     <section className="relative pb-14 pt-20" aria-labelledby="reception-heading">
       <EdgeBouquet side="right" tone="blush">
-        <Butterfly tone="lavender" size={40} tilt={12} path={2} dur={12} flap={3.3} delay={4} appear={1} className="right-[54%] top-[6%]" />
+        <Butterfly tone="lavender" size={40} tilt={12} path={2} dur={12} flap={3.3} delay={4} appear={1} className="right-[78%] -top-[2%]" />
       </EdgeBouquet>
       <Column>
         <SectionIntro icon="cake" id="reception-heading" heading={r.heading} text={r.text} />
@@ -200,7 +203,7 @@ function Reception() {
               alt={`${name} in a pink and lavender dress at her birthday photoshoot`}
               label={`Enlarge ${name}'s birthday photo`}
             >
-              <span className="block overflow-hidden rounded-[1.4rem] border-[6px] border-paper shadow-[0_24px_50px_-26px_rgb(88_69_54/0.5)]">
+              <span data-reveal="unveil" className="block overflow-hidden rounded-[1.4rem] border-[6px] border-paper shadow-[0_24px_50px_-26px_rgb(88_69_54/0.5)]">
                 <Photo
                   id="birthday"
                   alt={`${name} in a pink and lavender dress at her birthday photoshoot`}
@@ -215,10 +218,11 @@ function Reception() {
           <VenueCard icon="cake" label={r.label} time={r.time} venue={r.venue} address={r.address} mapUrl={r.map.url} />
         </div>
         <div data-scene="enter" className="-mx-6 mt-4">
-          <div className="scene-rise relative">
-            <Illustration art="reception" />
-            <Butterfly tone="blush" size={34} tilt={-8} path={3} dur={9} flap={2.6} delay={1} appear={1.6} className="right-[16%] top-[2%]" />
-          </div>
+          <figure className="scene-rise relative m-0">
+            <Illustration art="gate" />
+            <Butterfly tone="blush" size={34} tilt={-8} path={3} dur={9} flap={2.6} delay={1} appear={1.6} className="right-[30%] top-[4%]" />
+            <figcaption className="eyebrow -mt-1 text-center !text-[0.78rem] !tracking-[0.2em]">{r.landmark}</figcaption>
+          </figure>
         </div>
       </Column>
     </section>
@@ -227,9 +231,9 @@ function Reception() {
 
 /* ---------------------------------------------------------------- details */
 
-function DetailCard({ icon, title, children }: { icon: IconName; title: string; children: ReactNode }) {
+function DetailCard({ icon, title, from, children }: { icon: IconName; title: string; from: "left" | "right"; children: ReactNode }) {
   return (
-    <div className="card px-5 py-6" data-reveal>
+    <div className="card px-5 py-6" data-reveal={from}>
       <div className="flex items-center gap-3">
         <span className="grid size-11 flex-none place-items-center rounded-full bg-lavender/70 text-plum" aria-hidden="true">
           <Icon name={icon} size={24} strokeWidth={1.3} />
@@ -246,7 +250,7 @@ function Details() {
   return (
     <section className="relative pb-14 pt-20" aria-labelledby="details-heading">
       <EdgeBouquet side="left" tone="blush">
-        <Butterfly tone="ivory" size={36} tilt={-6} path={1} dur={14} flap={3.6} delay={5} appear={1.4} className="left-[54%] top-[8%]" />
+        <Butterfly tone="ivory" size={36} tilt={-6} path={1} dur={14} flap={3.6} delay={5} appear={1.4} className="left-[78%] top-0" />
       </EdgeBouquet>
       <Column>
         <div className="text-center" data-reveal-stagger>
@@ -257,12 +261,15 @@ function Details() {
         </div>
 
         <div className="mt-8 space-y-5">
-          <DetailCard icon="dress" title={d.dressCode.heading}>
-            <dl className="mt-3 space-y-3">
-              {d.dressCode.rows.map((row) => (
-                <div key={row.who}>
-                  <dt className="font-semibold">{row.who}</dt>
-                  <dd className="prose-soft">{row.what}</dd>
+          <DetailCard icon="dress" title={d.dressCode.heading} from="left">
+            <dl className="mt-4 grid grid-cols-2 gap-3" data-reveal-stagger>
+              {d.dressCode.rows.map((row, i) => (
+                <div key={row.who} className="flex flex-col items-center rounded-2xl bg-paper/90 px-2 py-4 text-center ring-1 ring-gold/20">
+                  <span className="grid size-11 place-items-center rounded-full bg-lavender/60 text-plum" aria-hidden="true">
+                    <Icon name={i === 0 ? "shirt" : "bow"} size={24} strokeWidth={1.3} />
+                  </span>
+                  <dt className="mt-2 font-semibold leading-snug">{row.who}</dt>
+                  <dd className="prose-soft mt-0.5 text-[0.95rem] leading-snug">{row.what}</dd>
                 </div>
               ))}
             </dl>
@@ -272,21 +279,23 @@ function Details() {
             </p>
           </DetailCard>
 
-          <DetailCard icon="gift" title={d.gifts.heading}>
+          <DetailCard icon="gift" title={d.gifts.heading} from="right">
             <p className="prose-soft mt-2">{d.gifts.text}</p>
-            <ul className="mt-4 grid grid-cols-2 gap-3">
+            <ul className="mt-4 grid grid-cols-2 gap-3" data-reveal-stagger>
               {d.gifts.items.map((item) => (
                 <li key={item.label} className="flex flex-col items-center gap-2 rounded-2xl bg-paper/90 px-2 py-4 text-center ring-1 ring-gold/20">
-                  <Icon name={item.icon} size={30} strokeWidth={1.3} className="text-gold" />
+                  <span className="grid size-12 place-items-center rounded-full bg-lavender/60 text-plum" aria-hidden="true">
+                    <Icon name={item.icon} size={26} strokeWidth={1.3} />
+                  </span>
                   <span className="text-[0.95rem] leading-snug">{item.label}</span>
                 </li>
               ))}
             </ul>
           </DetailCard>
 
-          <DetailCard icon="heart" title={d.reminders.heading}>
+          <DetailCard icon="heart" title={d.reminders.heading} from="left">
             <p className="prose-soft mt-2">{d.reminders.text}</p>
-            <ul className="mt-4 grid grid-cols-2 gap-3" aria-hidden="true">
+            <ul className="mt-4 grid grid-cols-2 gap-3" aria-hidden="true" data-reveal-stagger>
               {d.reminders.items.map((item) => (
                 <li key={item.label} className="flex flex-col items-center gap-2 text-center">
                   <span className="grid size-14 place-items-center rounded-full bg-blush/60 text-plum ring-1 ring-plum/15">
@@ -310,7 +319,7 @@ function Rsvp() {
   return (
     <section id="rsvp" className="relative pt-20" aria-labelledby="rsvp-heading">
       <EdgeBouquet side="right" tone="lavender">
-        <Butterfly tone="periwinkle" size={38} tilt={10} path={4} dur={10} flap={3.1} delay={2.5} appear={1.2} className="right-[52%] top-[6%]" />
+        <Butterfly tone="periwinkle" size={38} tilt={10} path={4} dur={10} flap={3.1} delay={2.5} appear={1.2} className="right-[78%] top-0" />
       </EdgeBouquet>
       <Column>
         <SectionIntro icon="envelope" id="rsvp-heading" heading={r.heading} text={r.text} />

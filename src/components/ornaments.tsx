@@ -95,6 +95,7 @@ export function Flourish({
 // A gold leafy sprig; mirrored on the right of a centered icon.
 function Sprig({ flip = false }: { flip?: boolean }) {
   return (
+    <span className={`sprig ${flip ? "sprig-r" : "sprig-l"}`}>
     <svg
       viewBox="0 0 72 20"
       width="72"
@@ -111,6 +112,7 @@ function Sprig({ flip = false }: { flip?: boolean }) {
       <path d="M50 10c-3-5-8-6-11-5 3 3 6 5 11 5zM36 10c-3 4-8 6-11 5 2-3 6-5 11-5zM22 10.5c-3-4-7-5-10-4 3 3 6 4 10 4z" fill="var(--color-sage)" />
       <circle cx="3" cy="11" r="1.6" fill="var(--color-gold)" stroke="none" />
     </svg>
+    </span>
   );
 }
 

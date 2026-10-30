@@ -39,14 +39,14 @@ export const event = {
     heading: "A Year of Love & Joy",
     text: "One wonderful year of precious smiles, sweet memories, and endless love. Join us as we celebrate Isabelle's very first birthday with the people who make her world brighter.",
     label: "Celebration Reception",
+    landmark: "Landmark: St. Bernard Subdivision entrance",
     time: "2:00 PM",
     venue: "Fernandez Private Resort",
     address: "St. Bernard Subdivision, San Francisco, Tarlac City, Tarlac",
     map: {
-      // Family-requested landmark: Google Maps listing for St. Bernard Subdivision.
-      // Opens Google's own result for this exact name (no guessed coordinates).
-      url: "https://www.google.com/maps/search/?api=1&query=St.%20Bernard%20Subdivision%2C%20San%20Francisco%2C%20Tarlac%20City%2C%20Tarlac",
-      verified: false,
+      // Family-provided Google Maps pin: St. Bernard Subdivision, Sampaguita Street.
+      url: "https://maps.app.goo.gl/GnzxeNZSdFok4RLS6",
+      verified: true,
     },
   },
 
