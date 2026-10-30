@@ -2,7 +2,8 @@ import "server-only";
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getDb } from "./db";
-import { createSession, deleteSession, findSessionAdmin, SESSION_DAYS, type Admin } from "./auth";
+import { createSession, deleteSession, findSessionAdmin, touchSession, type Admin } from "./auth";
+import { ADMIN_IDLE_MS } from "./session-policy";
 
 const secure = process.env.NODE_ENV === "production";
 // __Host- binds the cookie to this exact origin over HTTPS.
@@ -17,8 +18,19 @@ export async function startAdminSession(adminId: string) {
     sameSite: "lax",
     path: "/",
     expires: expiresAt,
-    maxAge: SESSION_DAYS * 86400,
+    maxAge: ADMIN_IDLE_MS / 1000,
   });
+}
+
+// Called only from a server action, where refreshing cookies is allowed.
+export async function refreshAdminSession(): Promise<boolean> {
+  const store = await cookies();
+  const token = store.get(COOKIE)?.value;
+  if (!token) return false;
+  const expiresAt = await touchSession(await getDb(), token);
+  if (!expiresAt) { store.delete(COOKIE); return false; }
+  store.set(COOKIE, token, { httpOnly: true, secure, sameSite: "lax", path: "/", expires: expiresAt, maxAge: ADMIN_IDLE_MS / 1000 });
+  return true;
 }
 
 export async function getCurrentAdmin(): Promise<Admin | null> {

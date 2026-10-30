@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { authenticate, createSession, deleteSession, findSessionAdmin, hashPassword, upsertAdmin, verifyPassword } from "@/lib/auth";
+import { authenticate, createSession, deleteSession, findSessionAdmin, hashPassword, touchSession, upsertAdmin, verifyPassword } from "@/lib/auth";
 import { schemaStatements } from "@/lib/db";
 import { createInvite, deleteInvite, getInviteByToken, listInvites, listResponses, respond } from "@/lib/godparents";
 import { bucketKey, hitRateLimit } from "@/lib/rate-limit";
@@ -113,6 +113,26 @@ describe("admin authentication", () => {
     const { token } = await createSession(db, admin.id);
     const rows = await db.query<{ token_hash: string }>("select token_hash from admin_sessions");
     expect(rows[0].token_hash).not.toBe(token);
+  });
+
+  it("expires an inactive session at exactly thirty minutes", async () => {
+    const admin = await upsertAdmin(db, "family", "a-long-family-password");
+    const now = new Date("2026-11-01T00:00:00Z");
+    const { token, expiresAt } = await createSession(db, admin.id, now);
+    expect(expiresAt.toISOString()).toBe("2026-11-01T00:30:00.000Z");
+    expect(await findSessionAdmin(db, token, new Date("2026-11-01T00:29:59Z"))).not.toBeNull();
+    expect(await findSessionAdmin(db, token, expiresAt)).toBeNull();
+    expect(await touchSession(db, token, expiresAt)).toBeNull();
+  });
+
+  it("extends a live session from its most recent activity", async () => {
+    const admin = await upsertAdmin(db, "family", "a-long-family-password");
+    const { token } = await createSession(db, admin.id, new Date("2026-11-01T00:00:00Z"));
+    const extended = await touchSession(db, token, new Date("2026-11-01T00:20:00Z"));
+    expect(extended?.toISOString()).toBe("2026-11-01T00:50:00.000Z");
+    expect(await findSessionAdmin(db, token, new Date("2026-11-01T00:40:00Z"))).not.toBeNull();
+    expect(await findSessionAdmin(db, token, new Date("2026-11-01T00:50:00Z"))).toBeNull();
+    expect(await touchSession(db, "forged-token", new Date("2026-11-01T00:21:00Z"))).toBeNull();
   });
 
   it("signs out existing sessions when the password changes", async () => {

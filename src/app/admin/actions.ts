@@ -8,7 +8,7 @@ import { getDb } from "@/lib/db";
 import { createInvite, deleteInvite, deleteResponse } from "@/lib/godparents";
 import { bucketKey, hitRateLimit, LIMITS } from "@/lib/rate-limit";
 import { deleteRsvp } from "@/lib/rsvp";
-import { clientIp, endAdminSession, requireAdmin, startAdminSession } from "@/lib/session";
+import { clientIp, endAdminSession, refreshAdminSession, requireAdmin, startAdminSession } from "@/lib/session";
 import { firstError, formFields, inviteSchema, loginSchema } from "@/lib/validation";
 
 export type LoginState = { error?: string; username?: string };
@@ -39,6 +39,14 @@ export async function loginAction(_prev: LoginState, formData: FormData): Promis
 export async function logoutAction() {
   await endAdminSession();
   redirect("/admin/login");
+}
+
+export async function adminActivityAction(): Promise<boolean> {
+  return refreshAdminSession();
+}
+
+export async function idleSignOutAction(): Promise<void> {
+  await endAdminSession();
 }
 
 const idSchema = z.uuid();

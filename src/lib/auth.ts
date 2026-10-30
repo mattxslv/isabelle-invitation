@@ -2,6 +2,7 @@
 // database-backed sessions. Only SHA-256 hashes of session tokens are stored.
 import { createHash, randomBytes, scrypt as scryptCb, timingSafeEqual, type ScryptOptions } from "node:crypto";
 import type { Db } from "./db";
+import { ADMIN_IDLE_MS } from "./session-policy";
 
 const scrypt = (password: string, salt: Buffer, keylen: number, options: ScryptOptions) =>
   new Promise<Buffer>((resolve, reject) =>
@@ -10,8 +11,6 @@ const scrypt = (password: string, salt: Buffer, keylen: number, options: ScryptO
 
 const PARAMS = { N: 16384, r: 8, p: 1, maxmem: 64 * 1024 * 1024 };
 const KEYLEN = 64;
-
-export const SESSION_DAYS = 7;
 
 export async function hashPassword(password: string): Promise<string> {
   const salt = randomBytes(16);
@@ -53,7 +52,7 @@ export function hashToken(token: string): string {
 
 export async function createSession(db: Db, adminId: string, now: Date = new Date()) {
   const token = randomBytes(32).toString("base64url");
-  const expiresAt = new Date(now.getTime() + SESSION_DAYS * 86400_000);
+  const expiresAt = new Date(now.getTime() + ADMIN_IDLE_MS);
   await db.query(`insert into admin_sessions (token_hash, admin_id, expires_at) values ($1, $2, $3)`, [
     hashToken(token),
     adminId,
@@ -77,6 +76,17 @@ export async function findSessionAdmin(db: Db, token: string, now: Date = new Da
 
 export async function deleteSession(db: Db, token: string): Promise<void> {
   await db.query(`delete from admin_sessions where token_hash = $1`, [hashToken(token)]);
+}
+
+// Activity extends a live session; an expired session can never be revived.
+export async function touchSession(db: Db, token: string, now: Date = new Date()): Promise<Date | null> {
+  if (!token || token.length > 100) return null;
+  const expiresAt = new Date(now.getTime() + ADMIN_IDLE_MS);
+  const rows = await db.query<{ token_hash: string }>(
+    `update admin_sessions set expires_at = $3 where token_hash = $1 and expires_at > $2 returning token_hash`,
+    [hashToken(token), now.toISOString(), expiresAt.toISOString()],
+  );
+  return rows.length ? expiresAt : null;
 }
 
 export async function upsertAdmin(db: Db, username: string, password: string): Promise<Admin> {

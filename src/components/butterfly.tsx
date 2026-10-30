@@ -58,7 +58,7 @@ export function Butterfly({
     <span
       aria-hidden="true"
       className={`bfly ${fluttering ? "is-fluttering" : ""} ${className}`}
-      onClick={flutter}
+      onClick={(event) => { event.stopPropagation(); flutter(); }}
       style={
         {
           "--size": `${size}px`,

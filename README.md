@@ -50,7 +50,7 @@ command again for the same username resets the password and signs out their othe
 - The whole site sends `noindex` (meta and `X-Robots-Tag`).
 - RSVPs are written only through server actions with Zod validation, a honeypot, Postgres-backed rate limiting (salted hashes, no raw IPs), and a server-side deadline check in Philippine time.
 - Retries are idempotent (per-answer submission key). A second reply under the same name is stored and flagged, never silently overwritten.
-- Admin sessions: scrypt password hashes, random 256-bit session tokens stored only as SHA-256 hashes, `HttpOnly` / `Secure` / `SameSite=Lax` (`__Host-` prefix in production), 7-day expiry. Every admin page and action re-checks the session on the server.
+- Admin sessions: scrypt password hashes, random 256-bit session tokens stored only as SHA-256 hashes, `HttpOnly` / `Secure` / `SameSite=Lax` (`__Host-` prefix in production), 30-minute inactivity expiry. Every admin page and action re-checks the session on the server.
 - Row level security is enabled on every table with no policies. The app connects as the table owner and is unaffected, while any other role (such as a future Data API) sees nothing. This is covered by tests.
 
 ## Before launch (blockers)

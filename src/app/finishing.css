@@ -62,7 +62,7 @@
 #rsvp-name::placeholder,#gp-name::placeholder { text-transform:none; }
 .countdown-number-window { display:block; overflow:hidden; height:1.2em; min-width:2ch; line-height:1.2 !important; }
 .countdown-number { display:block; animation:countdown-roll 650ms var(--ease-soft) both; }
-.bfly.bfly-front { z-index:5; pointer-events:none; }
+.bfly.bfly-front { z-index:5; pointer-events:auto; }
 .monogram-loader { display:grid; place-items:center; min-height:calc(100svh - 6rem); }
 .admin-loader-screen { position:fixed; inset:0; z-index:100; display:grid; place-items:center; background:var(--color-cream); }
 .loader-monogram { display:flex; align-items:center; font-family:var(--font-script); font-size:5rem; line-height:1; color:#8a6c9e; animation:monogram-breathe 1500ms ease-in-out infinite; }
