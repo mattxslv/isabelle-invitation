@@ -206,7 +206,7 @@ function Reception() {
   return (
     <section id="reception" className="garden-chapter relative pb-14 pt-20" aria-labelledby="reception-heading">
       <GardenLights />
-      <EdgeBouquet side="right" tone="blush">
+      <EdgeBouquet side="right" tone="blush" arrangement="spray">
         <Butterfly tone="lavender" size={40} tilt={12} path={2} dur={12} flap={3.3} delay={4} appear={1} className="right-[78%] -top-[2%]" />
       </EdgeBouquet>
       <Column>
@@ -265,7 +265,7 @@ function Details() {
   const d = event.details;
   return (
     <section id="details" className="garden-details relative pb-14 pt-20" aria-labelledby="details-heading">
-      <EdgeBouquet side="left" tone="blush">
+      <EdgeBouquet side="left" tone="blush" arrangement="corner">
         <Butterfly tone="ivory" size={36} tilt={-6} path={1} dur={14} flap={3.6} delay={5} appear={1.4} className="left-[78%] top-0" />
       </EdgeBouquet>
       <Column>
@@ -335,7 +335,7 @@ function Rsvp() {
   const r = event.rsvp;
   return (
     <section id="rsvp" className="garden-rsvp relative pt-20" aria-labelledby="rsvp-heading">
-      <EdgeBouquet side="right" tone="lavender">
+      <EdgeBouquet side="right" tone="lavender" arrangement="spray">
         <Butterfly tone="periwinkle" size={38} tilt={10} path={4} dur={10} flap={3.1} delay={2.5} appear={1.2} className="right-[78%] top-0" />
       </EdgeBouquet>
       <Column>

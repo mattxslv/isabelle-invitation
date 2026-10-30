@@ -67,11 +67,12 @@ export function Corner({
 
 // Bouquet growing in from the left or right page edge, straddling the top of
 // its section so it sits in the gap between sections, never beside text.
-export function EdgeBouquet({ side, tone = "blush", children }: { side: "left" | "right"; tone?: "blush" | "lavender"; children?: ReactNode }) {
+export function EdgeBouquet({ side, tone = "blush", arrangement = "edge", children }: { side: "left" | "right"; tone?: "blush" | "lavender"; arrangement?: "edge" | "spray" | "corner"; children?: ReactNode }) {
+  const art: ArtName = arrangement === "corner" ? "corner" : arrangement === "spray" ? `spray-${tone}` : `edge-${tone}`;
   return (
-    <div className={`deco edge-bouquet sway sway-${side === "left" ? "l" : "r"}`} style={{ [side]: -6 }} aria-hidden="true">
+    <div className={`deco edge-bouquet edge-${arrangement} sway sway-${side === "left" ? "l" : "r"}`} style={{ [side]: -6 }} aria-hidden="true">
       <div className={`bloom-${side} ${side === "right" ? "mirror-x" : ""}`} data-reveal="bloom">
-        <Art art={tone === "blush" ? "edge-blush" : "edge-lavender"} />
+        <Art art={art} />
       </div>
       {children}
     </div>
