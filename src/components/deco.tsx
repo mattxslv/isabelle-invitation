@@ -82,7 +82,7 @@ export function EdgeBouquet({ side, tone = "blush", children }: { side: "left" |
 export function Garland({ className = "", children }: { className?: string; children?: ReactNode }) {
   const [width, height] = SIZES.garland;
   return (
-    <div className={`relative overflow-hidden select-none ${className}`} aria-hidden="true">
+    <div className={`floral-footer relative select-none ${className}`} aria-hidden="true">
       {/* eslint-disable-next-line @next/next/no-img-element -- static pre-rendered art */}
       <img
         src="/art/garland.webp"
@@ -139,28 +139,5 @@ export function ChurchPhoto() {
         </picture>
       </span>
     </figure>
-  );
-}
-
-// License attribution for the church photo (CC BY-SA 4.0 requires credit).
-// Kept discreet in the page footer rather than under the photo.
-export function PhotoCredit() {
-  return (
-    <p className="px-6 pb-6 pt-2 text-center text-[0.7rem] text-ink-soft/70">
-      Church photo by{" "}
-      <a
-        className="underline underline-offset-2"
-        href="https://commons.wikimedia.org/wiki/File:01010ajfSaint_Michael_Archangel_Parish_Church_Tarlac_Cityfvf_05.jpg"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Judgefloro
-      </a>{" "}
-      (
-      <a className="underline underline-offset-2" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">
-        CC BY-SA 4.0
-      </a>
-      )
-    </p>
   );
 }

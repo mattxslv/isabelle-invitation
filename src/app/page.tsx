@@ -1,8 +1,9 @@
+/* eslint-disable @next/next/no-img-element -- photos are optimized at build time */
 import type { CSSProperties, ReactNode } from "react";
 import { event } from "@/content/event";
 import { Butterfly } from "@/components/butterfly";
 import { Countdown } from "@/components/countdown";
-import { ChurchPhoto, Corner, Deco, EdgeBouquet, Garland, Illustration, PhotoCredit } from "@/components/deco";
+import { ChurchPhoto, Corner, Deco, EdgeBouquet, Garland } from "@/components/deco";
 import { Lightbox } from "@/components/lightbox";
 import { Flourish, GoldFrame, HeartRule, Icon, IconSprigs, type IconName } from "@/components/ornaments";
 import { fullPhoto, Photo } from "@/components/photo";
@@ -20,7 +21,6 @@ export default function InvitationPage() {
       <Reception />
       <Details />
       <Rsvp />
-      <PhotoCredit />
     </main>
   );
 }
@@ -217,11 +217,11 @@ function Reception() {
         <div className="mt-6">
           <VenueCard icon="cake" label={r.label} time={r.time} venue={r.venue} address={r.address} mapUrl={r.map.url} />
         </div>
-        <div data-scene="enter" className="-mx-6 mt-4">
+        <div data-scene="enter" className="mt-7">
           <figure className="scene-rise relative m-0">
-            <Illustration art="gate" />
+            <Lightbox full={{avif:"/venues/st-bernard-photo.avif",webp:"/venues/st-bernard-photo.webp",width:1200,height:733}} alt="St. Bernard Subdivision entrance" label="Enlarge the St. Bernard entrance photo"><span className="venue-landmark"><img src="/venues/st-bernard-photo.webp" alt="Actual entrance to St. Bernard Subdivision, with its yellow guardhouse and iron gates" width={1200} height={733} loading="lazy" /></span></Lightbox>
             <Butterfly tone="blush" size={34} tilt={-8} path={3} dur={9} flap={2.6} delay={1} appear={1.6} className="right-[30%] top-[4%]" />
-            <figcaption className="eyebrow -mt-1 text-center !text-[0.78rem] !tracking-[0.2em]">{r.landmark}</figcaption>
+            <figcaption className="eyebrow mt-3 text-center !text-[0.78rem] !tracking-[0.2em]">{r.landmark}</figcaption>
           </figure>
         </div>
       </Column>

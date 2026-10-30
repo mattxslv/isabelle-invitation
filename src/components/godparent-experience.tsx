@@ -1,10 +1,10 @@
-import type { CSSProperties } from "react";
+import { Envelope } from "./envelope";
 import { event, godparents, type GodparentRole } from "@/content/event";
 import { Butterfly } from "./butterfly";
-import { Corner, Garland } from "./deco";
+import { Garland } from "./deco";
 import { GodparentResponse } from "./godparent-response";
 import { Lightbox } from "./lightbox";
-import { HeartRule, Icon, IconSprigs, WaxSeal } from "./ornaments";
+import { HeartRule, Icon, IconSprigs } from "./ornaments";
 import { fullPhoto, Photo } from "./photo";
 import { ScrollFx } from "./scroll-fx";
 
@@ -29,53 +29,12 @@ export function GodparentExperience({ mode }: { mode: GodparentMode }) {
     <main className="relative">
       <ScrollFx />
 
-      {/* 1-2. The envelope arrives, the seal lifts, and it opens as you scroll. */}
-      <section className="gp-scene" data-scene="sticky" aria-label="An envelope opening">
-        <div className="gp-sticky">
-          <Corner pos="tl" eager width="clamp(140px, 42vw, 22rem)">
-            <Butterfly tone="lavender" size={44} tilt={12} path={1} dur={11} flap={3.2} appear={1} className="left-[60%] top-[56%]" />
-          </Corner>
-          <Corner pos="br" eager width="clamp(150px, 46vw, 22rem)">
-            <Butterfly tone="blush" size={38} tilt={-16} path={2} dur={12} flap={2.9} delay={2} appear={2.2} className="right-[58%] bottom-[60%]" />
-          </Corner>
-          <Butterfly tone="periwinkle" size={32} tilt={8} path={3} dur={10} flap={3.6} delay={4} appear={3.2} className="bottom-[12%] left-[8%]" />
-
-          <div className="gp-intro px-6">
-            <p className="script gold-text enter px-2 pb-1 text-[clamp(2.6rem,11vw,3.4rem)] leading-[1.2]">{godparents.eyebrow}</p>
-            <p className="eyebrow enter mt-2" style={{ "--d": "250ms" } as CSSProperties}>
-              For my {greeting}
-            </p>
-          </div>
-
-          <div className="envelope enter" style={{ "--d": "400ms" } as CSSProperties} aria-hidden="true">
-            <div className="env-back" />
-            <div className="env-flap-open" />
-            <div className="env-letter">
-              <div className="px-4">
-                <p className="script gold-text px-2 pb-1 text-[clamp(2rem,9vw,2.6rem)] leading-[1.15]">{godparents.envelopeTitle}</p>
-                <HeartRule className="mt-1" />
-              </div>
-            </div>
-            <div className="env-front" />
-            <div className="env-flap" />
-            <div className="env-seal">
-              <WaxSeal letter="I" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <Envelope greeting={greeting} />
 
       {/* 3. The letter. */}
-      <section className="relative pb-12 pt-4" aria-labelledby="letter-heading">
+      <section id="godparent-letter" className="letter-section relative pb-12 pt-12" aria-labelledby="letter-heading">
         <div className="layer mx-auto max-w-[30rem] px-6">
-          <article className="card overflow-hidden px-6 pb-14 pt-6 text-center" data-reveal>
-            {/* Bouquets tucked into the card's own corners, clipped by its rounded edge. */}
-            <Corner pos="tr" width="30%">
-              <Butterfly tone="ivory" size={34} tilt={-10} path={4} dur={12} flap={3.4} delay={1} appear={1.4} className="right-[52%] top-[48%]" />
-            </Corner>
-            <Corner pos="bl" width="30%">
-              <Butterfly tone="lavender" size={32} tilt={12} path={2} dur={13} flap={3} delay={5} appear={2} className="left-[50%] bottom-[52%]" />
-            </Corner>
+          <article className="card letter-card px-6 pb-10 pt-8 text-center" data-reveal>
             <div className="layer">
             <div className="mx-auto w-48">
               <Lightbox full={fullPhoto("letter")} alt={`${name} in a pink dress with a big pink bow`} label={`Enlarge photo of ${name}`}>
@@ -84,7 +43,7 @@ export function GodparentExperience({ mode }: { mode: GodparentMode }) {
                 </span>
               </Lightbox>
             </div>
-            <h1 id="letter-heading" className="script gold-text mt-6 px-2 pb-1 text-[clamp(2.4rem,10vw,3rem)] leading-[1.2]">
+            <h1 id="letter-heading" tabIndex={-1} className="script gold-text mt-6 px-2 pb-1 text-[clamp(2.4rem,10vw,3rem)] leading-[1.2]">
               Dear {greeting},
             </h1>
             <div className="mt-4 space-y-4 font-display text-[1.3rem] leading-relaxed text-ink" data-reveal-stagger>

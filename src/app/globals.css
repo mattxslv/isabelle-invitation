@@ -1031,3 +1031,27 @@ html:not(.js) .gp-sticky {
 html:not(.js) .gp-scene[data-scene] {
   --p: 0.6;
 }
+
+/* Quiet stationery details and clear space around each floral arrangement. */
+.section-emblem { display:grid; place-items:center; width:4.3rem; height:4.3rem; border:1px solid rgb(167 130 86 / .25); border-radius:50%; background:linear-gradient(145deg,#fffdf8,#f0e6f5); box-shadow:0 6px 20px -12px #a78256; }
+.venue-landmark { display:block; overflow:hidden; border:6px solid var(--color-paper); border-radius:1.4rem; box-shadow:0 18px 36px -25px #58453680; }
+.venue-landmark img { width:100%; height:auto; display:block; }
+.imported-loop { display:inline-grid; place-items:center; }
+.imported-loop img { display:block; }
+.motion-still { display:none; }
+.floral-footer { margin-top:4rem; padding-top:2rem; overflow:hidden; isolation:isolate; }
+.edge-bouquet { width:clamp(85px,24vw,185px); top:-2rem; }
+.letter-card { background:linear-gradient(155deg,#fffdfa 50%,#f6edf5); border:1px solid #c5a67d70; outline:1px solid #c5a67d35; outline-offset:-9px; }
+.letter-section { scroll-margin-top:1.5rem; }
+.tap-envelope.gp-scene { height:auto; min-height: min(850px,100svh); --p:0; }
+.tap-envelope .gp-sticky { position:relative; min-height:740px; height:100svh; max-height:900px; overflow:visible; }
+.tap-envelope .gp-intro { top:clamp(95px,16svh,150px); opacity:1; transform:none; max-width:30rem; margin:auto; }
+.tap-envelope .envelope { display:block; padding:0; border:0; background:none; margin-top:16svh; cursor:pointer; touch-action:manipulation; --open:0; --lift:0; --seal:0; --away:0; }
+.tap-envelope.is-open .envelope { --open:1; --lift:1; --seal:1; }
+.tap-envelope .env-flap, .tap-envelope .env-flap-open { transition:transform .85s ease-in-out, opacity .1s .4s; }
+.tap-envelope .env-seal { transition:transform .35s, opacity .3s; }
+.tap-envelope .env-letter { transition:transform 1s .6s cubic-bezier(.22,.8,.28,1); }
+.tap-envelope.is-open .gp-intro { opacity:0; transition:opacity .35s; }
+.envelope-hint { position:absolute; top:78%; left:1rem; right:1rem; display:flex; align-items:center; justify-content:center; gap:.6rem; font-family:var(--font-display); font-size:1.15rem; color:var(--color-gold-ink); }
+@media (max-height:740px) { .tap-envelope .gp-sticky { min-height:650px; } .tap-envelope .gp-intro { top:80px; } }
+@media (prefers-reduced-motion:reduce) { .imported-loop img,.envelope-hint img { display:none; } .motion-still { display:block; } .tap-envelope .gp-sticky { padding:0; } }
