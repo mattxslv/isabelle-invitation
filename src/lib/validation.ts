@@ -58,12 +58,7 @@ export const inviteSchema = z.object({
 });
 
 export const loginSchema = z.object({
-  email: z
-    .string()
-    .max(200)
-    .trim()
-    .toLowerCase()
-    .pipe(z.email({ error: "Please enter a valid email." })),
+  username: z.string().trim().toLowerCase().min(1, "Please enter your username.").max(50).regex(/^[a-z0-9_.-]+$/, "Use letters, numbers, dots, underscores, or hyphens for your username."),
   password: z.string().min(1, "Please enter your password.").max(200),
 });
 

@@ -32,19 +32,19 @@ export async function verifyPassword(password: string, stored: string): Promise<
   return actual.length === expected.length && timingSafeEqual(actual, expected);
 }
 
-// Used when the email is unknown so response time does not reveal accounts.
-const DUMMY_HASH = "scrypt$16384$8$AAAAAAAAAAAAAAAAAAAAAA$" + "A".repeat(86);
+// Used when the username is unknown so response time does not reveal accounts.
+const DUMMY_HASH = "scrypt$16384$8$1$AAAAAAAAAAAAAAAAAAAAAA$" + "A".repeat(86);
 
-export type Admin = { id: string; email: string };
+export type Admin = { id: string; username: string };
 
-export async function authenticate(db: Db, email: string, password: string): Promise<Admin | null> {
-  const rows = await db.query<{ id: string; email: string; password_hash: string }>(
-    `select id, email, password_hash from admin_users where email = $1`,
-    [email.trim().toLowerCase()],
+export async function authenticate(db: Db, username: string, password: string): Promise<Admin | null> {
+  const rows = await db.query<{ id: string; username: string; password_hash: string }>(
+    `select id, username, password_hash from admin_users where username = $1`,
+    [username.trim().toLowerCase()],
   );
   const user = rows[0];
   const ok = await verifyPassword(password, user?.password_hash ?? DUMMY_HASH);
-  return user && ok ? { id: user.id, email: user.email } : null;
+  return user && ok ? { id: user.id, username: user.username } : null;
 }
 
 export function hashToken(token: string): string {
@@ -67,7 +67,7 @@ export async function createSession(db: Db, adminId: string, now: Date = new Dat
 export async function findSessionAdmin(db: Db, token: string, now: Date = new Date()): Promise<Admin | null> {
   if (!token || token.length > 100) return null;
   const rows = await db.query<Admin>(
-    `select u.id, u.email
+    `select u.id, coalesce(u.username, u.email) as username
      from admin_sessions s join admin_users u on u.id = s.admin_id
      where s.token_hash = $1 and s.expires_at > $2`,
     [hashToken(token), now.toISOString()],
@@ -79,13 +79,13 @@ export async function deleteSession(db: Db, token: string): Promise<void> {
   await db.query(`delete from admin_sessions where token_hash = $1`, [hashToken(token)]);
 }
 
-export async function upsertAdmin(db: Db, email: string, password: string): Promise<Admin> {
+export async function upsertAdmin(db: Db, username: string, password: string): Promise<Admin> {
   const hash = await hashPassword(password);
   const rows = await db.query<Admin>(
-    `insert into admin_users (email, password_hash) values ($1, $2)
-     on conflict (email) do update set password_hash = excluded.password_hash
-     returning id, email`,
-    [email.trim().toLowerCase(), hash],
+    `insert into admin_users (username, password_hash) values ($1, $2)
+     on conflict (username) do update set password_hash = excluded.password_hash
+     returning id, username`,
+    [username.trim().toLowerCase(), hash],
   );
   // A password change signs out every existing session for that admin.
   await db.query(`delete from admin_sessions where admin_id = $1`, [rows[0].id]);

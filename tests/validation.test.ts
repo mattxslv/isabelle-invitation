@@ -60,6 +60,6 @@ describe("godparent and admin schemas", () => {
   it("validates invites and logins", () => {
     expect(inviteSchema.safeParse({ displayName: "Maria", role: "ninang" }).success).toBe(true);
     expect(inviteSchema.safeParse({ displayName: "Maria", role: "tita" }).success).toBe(false);
-    expect(loginSchema.parse({ email: " Fam@Example.com ", password: "x" }).email).toBe("fam@example.com");
+    expect(loginSchema.parse({ username: " Avilanes ", password: "x" }).username).toBe("avilanes");
   });
 });

@@ -341,7 +341,6 @@ function Rsvp() {
       <Column>
         <SectionIntro icon="envelope" id="rsvp-heading" heading={r.heading} text={r.text} />
         <div className="rsvp-paper mt-7" data-reveal>
-          <p className="reply-label">A seat saved with love</p>
           <RsvpForm />
         </div>
       </Column>

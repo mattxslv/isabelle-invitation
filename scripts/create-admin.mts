@@ -2,7 +2,7 @@
 // admin_users table: only people added here can sign in. No credentials
 // live in code.
 //
-//   npm run admin:create -- someone@example.com
+//   npm run admin:create -- family-admin
 //
 // Prompts for the password (input hidden). For non-interactive use, set
 // ADMIN_PASSWORD in the environment for that single command.
@@ -31,9 +31,9 @@ function ask(question: string, hidden: boolean): Promise<string> {
   });
 }
 
-const email = process.argv[2];
-if (!email) {
-  console.error("Usage: npm run admin:create -- someone@example.com");
+const username = process.argv[2];
+if (!username) {
+  console.error("Usage: npm run admin:create -- family-admin");
   process.exit(1);
 }
 
@@ -51,7 +51,7 @@ if (password.length < 12) {
   process.exit(1);
 }
 
-const parsed = loginSchema.safeParse({ email, password });
+const parsed = loginSchema.safeParse({ username, password });
 if (!parsed.success) {
   console.error(parsed.error.issues[0]?.message);
   process.exit(1);
@@ -59,5 +59,5 @@ if (!parsed.success) {
 
 const db = await getDb();
 await applySchema(db);
-const admin = await upsertAdmin(db, parsed.data.email, password);
-console.log(`Admin ready: ${admin.email}. Existing sessions for this account were signed out.`);
+const admin = await upsertAdmin(db, parsed.data.username, password);
+console.log(`Admin ready: ${admin.username}. Existing sessions for this account were signed out.`);

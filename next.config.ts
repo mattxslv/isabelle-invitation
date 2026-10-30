@@ -14,6 +14,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Keep localhost independent of production builds and deployments.
+  distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,

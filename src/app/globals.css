@@ -1193,3 +1193,52 @@ html:not(.js) .gp-scene[data-scene] {
 .garden-page .letter-section { scroll-margin-top:1.5rem; }
 .gentle-petals { opacity:.65; }
 .gentle-petals > span { width:calc(var(--s) * .65); }
+
+/* One paper card surrounds the form and its confirmation. */
+.gp-answer { padding-block:.35rem; }
+.gp-answer.is-fresh { animation:rise 850ms var(--ease-soft) both; }
+.gp-answer.is-fresh > .prose-soft,
+.gp-answer.is-fresh > .btn { animation:rise 850ms var(--ease-soft) 100ms both; }
+
+.reply-card-heading { display:flex; align-items:center; gap:.85rem; padding-bottom:1.15rem; border-bottom:1px solid #d9c9e366; }
+.reply-card-icon { display:grid; place-items:center; width:3.2rem; height:3.2rem; flex:none; border-radius:50%; background:linear-gradient(140deg,#f4edf8,#e9dcf2); color:var(--color-plum); }
+.reply-card-heading h3 { font-family:var(--font-display); font-size:1.8rem; line-height:1.1; color:var(--color-plum); }
+.reply-card-heading p { font-size:.7rem; color:var(--color-ink-soft); margin-top:.3rem; }
+.invitation-reply label[for="rsvp-name"],.invitation-reply legend { font-size:.87rem; font-weight:500; margin-bottom:.6rem; }
+.invitation-reply .field { border-radius:.85rem; background:#fff; font-size:.95rem; min-height:3.3rem; }
+.invitation-reply .choice { gap:.8rem; padding:1rem; border-radius:1rem; border-color:#ded0e6; background:#fffdfa; transition:background .2s,border-color .2s,box-shadow .2s; }
+.invitation-reply .choice:has(input:checked) { border-color:#9b79b3; background:linear-gradient(125deg,#f2e8f8,#faf6fc); box-shadow:0 0 0 2px #d6c3e333; }
+.reply-choice-copy { display:flex; flex-direction:column; gap:.2rem; }
+.reply-choice-copy > span { font-size:.94rem; font-weight:500; }
+.reply-choice-copy small { font-size:.69rem; line-height:1.4; color:var(--color-ink-soft); }
+.invitation-reply .btn { font-family:var(--font-sans); font-size:.95rem; min-height:3.35rem; }
+.invitation-reply .btn:disabled { color:#776783; background:#e9e0ef; border:1px solid #d9cce2; }
+.reply-help { text-align:center; font-size:.74rem; color:var(--color-ink-soft); }
+
+.detail-card > .prose-soft { text-align:justify; text-align-last:start; text-justify:inter-word; text-wrap:wrap; hyphens:auto; }
+.garden-page .card,.garden-page .rsvp-paper {
+  box-shadow:0 1px 0 #ffffff inset,0 7px 15px -9px #77538d40,0 22px 42px -21px #77538d55;
+}
+
+/* Keep section transitions compact while leaving the painted edges clear. */
+.garden-page .floral-footer { margin-top:1.5rem; padding-top:0; }
+.garden-page .floral-footer .floral-garland > img { margin-top:-1.5rem; }
+.day-overview { margin-bottom:.75rem; padding-bottom:1.5rem; }
+.garden-chapter { padding-top:2.5rem; padding-bottom:1.5rem; }
+.garden-details { padding-top:3rem; padding-bottom:2rem; }
+.garden-rsvp { padding-top:3rem; }
+@media (min-width:900px) { .event-chapters .garden-chapter { padding-top:2.5rem; } }
+
+/* The growth transform is separate from the outer bouquet's gentle sway. */
+.floral-spray { transform-origin:50% 70%; }
+.floral-garland { display:flow-root; transform-origin:50% 100%; }
+.js [data-reveal="floral"] { transition:opacity 1.4s var(--ease-soft),transform 2s var(--ease-soft); }
+.js [data-reveal="floral"]:not(.is-in) { opacity:0; transform:scale(.3) rotate(-7deg); }
+.js [data-reveal="floral"].is-in { opacity:1; transform:scale(1) rotate(0); }
+.js .bloom-left[data-reveal="bloom"]:not(.is-in) { transform:scale(.3) rotate(-15deg); }
+.js .bloom-right[data-reveal="bloom"]:not(.is-in) { transform:scale(.3) rotate(15deg); }
+@media (prefers-reduced-motion:reduce) {
+  .js [data-reveal="floral"]:not(.is-in) { opacity:1; transform:none; }
+  .js .bloom-left[data-reveal="bloom"]:not(.is-in),
+  .js .bloom-right[data-reveal="bloom"]:not(.is-in) { opacity:1; transform:none; }
+}

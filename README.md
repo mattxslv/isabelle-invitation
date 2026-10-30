@@ -23,7 +23,7 @@ Local development and tests use PGlite (Postgres compiled to WASM), so the same 
 npm install
 cp .env.example .env.local      # fill in DATABASE_URL (Neon, pooled) and RATE_LIMIT_SALT
 npm run db:migrate              # applies db/schema.sql
-npm run admin:create -- you@example.com   # prompts for a password (min 12 chars)
+npm run admin:create -- family-admin   # prompts for a password (min 12 chars)
 npm run dev
 ```
 
@@ -32,7 +32,7 @@ If `DATABASE_URL` is empty, development uses a local database in `.data/pglite`.
 ### Family admins
 
 The allowlist **is** the `admin_users` table. Only people added with `npm run admin:create` can sign in. Running the
-command again for the same email resets the password and signs out their other sessions. No credentials live in code.
+command again for the same username resets the password and signs out their other sessions. No credentials live in code.
 
 ## Scripts
 

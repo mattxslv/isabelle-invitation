@@ -37,7 +37,7 @@ async function AdminContent() {
           <h1 className="heading mt-1 !text-[2.2rem]">Replies</h1>
         </div>
         <form action={logoutAction} className="text-right">
-          <p className="text-[0.9rem] text-ink-soft">{admin.email}</p>
+          <p className="text-[0.9rem] text-ink-soft">{admin.username}</p>
           <button type="submit" className="mt-1 font-medium text-plum underline underline-offset-4">
             Sign out
           </button>

@@ -91,14 +91,14 @@ describe("admin authentication", () => {
   });
 
   it("only signs in allowlisted admins with the right password", async () => {
-    await upsertAdmin(db, "Family@Example.com", "a-long-family-password");
-    expect(await authenticate(db, "family@example.com", "a-long-family-password")).toMatchObject({ email: "family@example.com" });
-    expect(await authenticate(db, "family@example.com", "nope")).toBeNull();
-    expect(await authenticate(db, "stranger@example.com", "a-long-family-password")).toBeNull();
+    await upsertAdmin(db, "Family", "a-long-family-password");
+    expect(await authenticate(db, "family", "a-long-family-password")).toMatchObject({ username: "family" });
+    expect(await authenticate(db, "family", "nope")).toBeNull();
+    expect(await authenticate(db, "stranger", "a-long-family-password")).toBeNull();
   });
 
   it("issues sessions that expire and can be revoked", async () => {
-    const admin = await upsertAdmin(db, "fam@example.com", "a-long-family-password");
+    const admin = await upsertAdmin(db, "family", "a-long-family-password");
     const now = new Date("2026-11-01T00:00:00Z");
     const { token } = await createSession(db, admin.id, now);
     expect(await findSessionAdmin(db, token, now)).toMatchObject({ id: admin.id });
@@ -109,16 +109,16 @@ describe("admin authentication", () => {
   });
 
   it("stores only a hash of the session token", async () => {
-    const admin = await upsertAdmin(db, "fam@example.com", "a-long-family-password");
+    const admin = await upsertAdmin(db, "family", "a-long-family-password");
     const { token } = await createSession(db, admin.id);
     const rows = await db.query<{ token_hash: string }>("select token_hash from admin_sessions");
     expect(rows[0].token_hash).not.toBe(token);
   });
 
   it("signs out existing sessions when the password changes", async () => {
-    const admin = await upsertAdmin(db, "fam@example.com", "a-long-family-password");
+    const admin = await upsertAdmin(db, "family", "a-long-family-password");
     const { token } = await createSession(db, admin.id);
-    await upsertAdmin(db, "fam@example.com", "another-long-password");
+    await upsertAdmin(db, "family", "another-long-password");
     expect(await findSessionAdmin(db, token)).toBeNull();
   });
 });

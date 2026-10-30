@@ -116,9 +116,13 @@ export function RsvpForm() {
         formData.set("submissionKey", key.current);
         startTransition(() => formAction(formData));
       }}
-      className="space-y-4 text-left"
+      className="invitation-reply space-y-5 text-left"
       noValidate
     >
+      <div className="reply-card-heading">
+        <span className="reply-card-icon" aria-hidden="true"><Icon name="envelope" size={25} /></span>
+        <div><h3>Your reply</h3><p>A little note for Isabelle &amp; family</p></div>
+      </div>
       <div>
         <label htmlFor="rsvp-name" className="mb-1.5 block font-medium">
           Your full name
@@ -163,7 +167,7 @@ export function RsvpForm() {
               <span className="dot" aria-hidden="true">
                 <Icon name="check" size={14} strokeWidth={2.4} className="text-white" />
               </span>
-              <span className="text-[1.0625rem]">{label}</span>
+              <span className="reply-choice-copy"><span>{label}</span><small>{value === "yes" ? "Count me in for the celebration" : "Sending love from afar"}</small></span>
             </label>
           ))}
         </div>
@@ -177,7 +181,7 @@ export function RsvpForm() {
         </label>
       </div>
 
-      <div role="status" aria-live="polite" className="min-h-[1.5rem] text-center">
+      <div role="status" aria-live="polite" className={state.status === "error" ? "text-center" : "sr-only"}>
         {state.status === "error" && (
           <p role="alert" className="font-medium text-[#9b3d52]">
             {state.message}
@@ -191,10 +195,8 @@ export function RsvpForm() {
         {pending ? "Sending..." : "Send RSVP"}
       </button>
       {!ready && (
-        <p className="text-center text-[0.95rem] text-ink-soft">Add your name and choose an answer to send your RSVP.</p>
+        <p className="reply-help">Enter your name and select a reply.</p>
       )}
-
-      <p className="pt-1 text-center text-[0.9rem] leading-relaxed text-ink-soft">{copy.privacy}</p>
     </form>
   );
 }

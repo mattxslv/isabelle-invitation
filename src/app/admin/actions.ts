@@ -11,26 +11,26 @@ import { deleteRsvp } from "@/lib/rsvp";
 import { clientIp, endAdminSession, requireAdmin, startAdminSession } from "@/lib/session";
 import { firstError, formFields, inviteSchema, loginSchema } from "@/lib/validation";
 
-export type LoginState = { error?: string; email?: string };
+export type LoginState = { error?: string; username?: string };
 
 export async function loginAction(_prev: LoginState, formData: FormData): Promise<LoginState> {
-  const fields = formFields(formData, ["email", "password"]);
+  const fields = formFields(formData, ["username", "password"]);
   // Returned so the form can refill it: React resets form fields after an action.
-  const email = (fields.email ?? "").slice(0, 200);
+  const username = (fields.username ?? "").slice(0, 200);
   const parsed = loginSchema.safeParse(fields);
-  if (!parsed.success) return { error: firstError(parsed.error), email };
+  if (!parsed.success) return { error: firstError(parsed.error), username };
 
   const db = await getDb();
-  const [byIp, byEmail] = await Promise.all([
+  const [byIp, byUsername] = await Promise.all([
     hitRateLimit(db, bucketKey("login-ip", await clientIp()), LIMITS.loginIp),
-    hitRateLimit(db, bucketKey("login-email", parsed.data.email), LIMITS.loginEmail),
+    hitRateLimit(db, bucketKey("login-username", parsed.data.username), LIMITS.loginUsername),
   ]);
-  if (!byIp.allowed || !byEmail.allowed) {
-    return { error: "Too many sign-in attempts. Please wait 15 minutes and try again.", email };
+  if (!byIp.allowed || !byUsername.allowed) {
+    return { error: "Too many sign-in attempts. Please wait 15 minutes and try again.", username };
   }
 
-  const admin = await authenticate(db, parsed.data.email, parsed.data.password);
-  if (!admin) return { error: "That email and password don't match a family account.", email };
+  const admin = await authenticate(db, parsed.data.username, parsed.data.password);
+  if (!admin) return { error: "That username and password don't match a family account.", username };
 
   await startAdminSession(admin.id);
   redirect("/admin");

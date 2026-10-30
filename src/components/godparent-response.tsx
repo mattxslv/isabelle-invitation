@@ -108,11 +108,11 @@ export function GodparentResponse({
 function Answered({ accepted, fresh = false }: { accepted: boolean; fresh?: boolean }) {
   const heading = useRef<HTMLParagraphElement>(null);
   useEffect(() => {
-    if (fresh) heading.current?.focus();
+    if (fresh) heading.current?.focus({ preventScroll: true });
   }, [fresh]);
 
   return (
-    <div className="card px-6 py-7 text-center">
+    <div className={`gp-answer text-center ${fresh ? "is-fresh" : ""}`}>
       {fresh && accepted && <Celebration />}
       <p ref={heading} tabIndex={-1} className="script gold-text px-2 pb-1 text-5xl leading-[1.2] outline-none">
         {accepted ? "Thank you!" : "Thank you"}

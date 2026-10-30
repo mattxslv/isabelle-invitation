@@ -32,7 +32,7 @@ function Art({ art, eager = false }: { art: ArtName; eager?: boolean }) {
 export function Deco({ art, className = "", style, eager = false }: { art: ArtName; className?: string; style?: CSSProperties; eager?: boolean }) {
   return (
     <div className={`deco ${className}`} style={style} aria-hidden="true">
-      <Art art={art} eager={eager} />
+      <div className="floral-spray" data-reveal="floral"><Art art={art} eager={eager} /></div>
     </div>
   );
 }
@@ -57,7 +57,7 @@ export function Corner({
   const flip = `${pos[1] === "r" ? "mirror-x" : ""} ${pos[0] === "b" ? "mirror-y" : ""}`;
   return (
     <div className={`deco sway sway-${pos}`} style={style} aria-hidden="true">
-      <div className={flip}>
+      <div className={`floral-corner ${flip}`} data-reveal="floral" style={{ transformOrigin: `${pos[1] === "l" ? "0%" : "100%"} ${pos[0] === "t" ? "0%" : "100%"}` }}>
         <Art art="corner" eager={eager} />
       </div>
       {children}
@@ -83,6 +83,7 @@ export function Garland({ className = "", children }: { className?: string; chil
   const [width, height] = SIZES.garland;
   return (
     <div className={`floral-footer relative select-none ${className}`} aria-hidden="true">
+      <div className="floral-garland" data-reveal="floral">
       {/* eslint-disable-next-line @next/next/no-img-element -- static pre-rendered art */}
       <img
         src="/art/garland.webp"
@@ -94,6 +95,7 @@ export function Garland({ className = "", children }: { className?: string; chil
         draggable={false}
         className="pointer-events-none relative left-1/2 block h-auto w-[max(100%,40rem)] max-w-none -translate-x-1/2"
       />
+      </div>
       {children}
     </div>
   );

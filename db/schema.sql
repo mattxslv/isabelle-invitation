@@ -38,6 +38,11 @@ create table if not exists admin_users (
   created_at timestamptz not null default now()
 );
 
+-- Add usernames without removing legacy email accounts or their sessions.
+alter table admin_users add column if not exists username text;
+alter table admin_users alter column email drop not null;
+create unique index if not exists admin_users_username_idx on admin_users (username);
+
 create table if not exists admin_sessions (
   token_hash text primary key,
   admin_id uuid not null references admin_users (id) on delete cascade,

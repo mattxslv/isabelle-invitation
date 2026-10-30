@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- local animated SVG assets */
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -45,7 +44,7 @@ export function Envelope({ greeting }: { greeting: string }) {
           <span className="env-seal"><WaxSeal letter="I" /></span>
           <span className="envelope-address">For someone very special</span>
         </button>
-        <p className="envelope-hint"><img src="/animations/bell.svg" width={24} height={24} alt="" />{opened ? "A little love, just for you…" : "Tap the seal to open your letter"}</p>
+        <p className="envelope-hint">{opened ? "A little love, just for you…" : "Tap the seal to open your letter"}</p>
       </div>
     </section>
   );

@@ -38,7 +38,7 @@ const JS_FLAG = "document.documentElement.classList.add('js')";
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${script.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${display.variable} ${sans.variable} ${script.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: JS_FLAG }} />
       </head>
