@@ -27,7 +27,7 @@ const PIECES = Array.from({ length: COUNT }, (_, i) => {
 
 // A brief, one-time drift of watercolor petals after a confirmed "yes".
 // Removes itself when done. Hidden entirely for reduced motion (see CSS).
-export function Celebration() {
+export function Celebration({ gentle = false }: { gentle?: boolean }) {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
@@ -38,8 +38,8 @@ export function Celebration() {
   if (done) return null;
 
   return (
-    <div className="celebration" aria-hidden="true">
-      {PIECES.map((p, i) => (
+    <div className={`celebration ${gentle ? "gentle-petals" : ""}`} aria-hidden="true">
+      {(gentle ? PIECES.slice(0, 9) : PIECES).map((p, i) => (
         <span
           key={i}
           style={

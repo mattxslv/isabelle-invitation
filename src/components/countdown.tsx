@@ -30,7 +30,8 @@ export function Countdown() {
   ];
 
   return (
-    <div className="card">
+    <div className="countdown-garden">
+      <p className="countdown-caption">A little closer to our special day</p>
       <p className="sr-only">
         Counting down to the christening on {event.dateLabel} at {event.christening.time}.
       </p>

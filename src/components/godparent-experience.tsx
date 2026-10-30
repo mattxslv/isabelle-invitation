@@ -1,3 +1,4 @@
+import { ChapterLabel, GardenHeader, GardenLights } from "./garden";
 import { Envelope } from "./envelope";
 import { event, godparents, type GodparentRole } from "@/content/event";
 import { Butterfly } from "./butterfly";
@@ -26,7 +27,8 @@ export function GodparentExperience({ mode }: { mode: GodparentMode }) {
   const name = event.celebrant.shortName;
 
   return (
-    <main className="relative">
+    <main className="garden-page godparent-garden relative">
+      <GardenHeader letter />
       <ScrollFx />
 
       <Envelope greeting={greeting} />
@@ -36,7 +38,8 @@ export function GodparentExperience({ mode }: { mode: GodparentMode }) {
         <div className="layer mx-auto max-w-[30rem] px-6">
           <article className="card letter-card px-6 pb-10 pt-8 text-center" data-reveal>
             <div className="layer">
-            <div className="mx-auto w-48">
+            <ChapterLabel>A place in my heart</ChapterLabel>
+            <div className="letter-portrait mx-auto w-48">
               <Lightbox full={fullPhoto("letter")} alt={`${name} in a pink dress with a big pink bow`} label={`Enlarge photo of ${name}`}>
                 <span className="block overflow-hidden rounded-t-full rounded-b-[1.4rem] border-[5px] border-paper shadow-[0_20px_40px_-24px_rgb(88_69_54/0.5)] ring-1 ring-gold/40">
                   <Photo id="letter" alt={`${name} in a pink dress with a big pink bow`} sizes="192px" className="block h-auto w-full" priority />
@@ -60,10 +63,11 @@ export function GodparentExperience({ mode }: { mode: GodparentMode }) {
       </section>
 
       {/* 4. The question. */}
-      <section className="relative pb-16 pt-6" aria-labelledby="question-heading">
+      <section className="godparent-question relative pb-16 pt-6" aria-labelledby="question-heading">
         <Butterfly tone="periwinkle" size={38} tilt={10} path={1} dur={10} flap={3.1} delay={1} appear={0.6} className="right-[6%] top-2" />
         <Butterfly tone="blush" size={32} tilt={-12} path={3} dur={12} flap={2.7} delay={3} appear={1.8} className="left-[6%] top-4" />
         <div className="layer mx-auto max-w-[30rem] px-6 text-center" data-reveal>
+          <GardenLights />
           <IconSprigs icon="cross" size={36} />
           <h2 id="question-heading" className="script gold-text mt-3 px-2 pb-1 text-[clamp(3rem,13vw,3.8rem)] leading-[1.2]">
             {role.question}
@@ -74,7 +78,7 @@ export function GodparentExperience({ mode }: { mode: GodparentMode }) {
             <br />
             {event.christening.venue}
           </p>
-          <div className="mt-7">
+          <div className="rsvp-paper mt-7">
             <GodparentResponse
               token={mode.kind === "invite" ? mode.token : undefined}
               role={mode.kind === "generic" ? undefined : mode.role}

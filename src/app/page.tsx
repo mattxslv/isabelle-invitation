@@ -8,17 +8,22 @@ import { Lightbox } from "@/components/lightbox";
 import { Flourish, GoldFrame, HeartRule, Icon, IconSprigs, type IconName } from "@/components/ornaments";
 import { fullPhoto, Photo } from "@/components/photo";
 import { RsvpForm } from "@/components/rsvp-form";
+import { ChapterLabel, DayOverview, GardenHeader, GardenLights } from "@/components/garden";
 import { ScrollFx } from "@/components/scroll-fx";
 
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
 export default function InvitationPage() {
   return (
-    <main className="relative">
+    <main className="garden-page relative">
       <ScrollFx />
+      <GardenHeader />
       <Hero />
-      <Christening />
-      <Reception />
+      <DayOverview />
+      <div className="event-chapters">
+        <Christening />
+        <Reception />
+      </div>
       <Details />
       <Rsvp />
     </main>
@@ -30,7 +35,8 @@ export default function InvitationPage() {
 function Hero() {
   const c = event.celebrant;
   return (
-    <section className="relative overflow-hidden pb-14 pt-[6.75rem] sm:pt-32" data-scene="exit" aria-labelledby="hero-name">
+    <section id="welcome" className="garden-hero relative overflow-hidden pb-14 pt-[6.75rem] sm:pt-32" data-scene="exit" aria-labelledby="hero-name">
+      <GardenLights />
       <Corner pos="tl" eager width="clamp(150px, 44vw, 24rem)">
         <Butterfly tone="lavender" size={44} tilt={-12} path={1} dur={12} flap={3.4} appear={1.2} className="left-[90%] top-[4%]" />
       </Corner>
@@ -38,8 +44,9 @@ function Hero() {
         <Butterfly tone="blush" size={38} tilt={14} path={2} dur={10} flap={2.8} delay={1.5} appear={2.1} className="right-[96%] top-[24%]" />
       </Corner>
 
-      <div className="layer mx-auto max-w-[30rem] px-6 text-center">
-        <p className="eyebrow enter" style={delay(150)}>
+      <div className="hero-composition layer mx-auto px-6 text-center">
+        <div className="hero-portrait-group">
+        <p className="invited-pill eyebrow enter" style={delay(150)}>
           You&rsquo;re Invited
         </p>
         <HeartRule className="enter mt-2" />
@@ -55,16 +62,20 @@ function Hero() {
               label={`Enlarge ${c.shortName}'s portrait`}
               className="layer"
             >
-              <span className="portrait block">
+              <span className="portrait garden-portrait block">
                 <span className="portrait-photo block">
                   <Photo id="hero" alt={`Portrait of ${c.shortName} in a white dress and bow`} sizes="(max-width: 480px) 74vw, 312px" priority />
                 </span>
                 <GoldFrame className="portrait-frame" />
               </span>
             </Lightbox>
+            <span className="first-year-badge"><span className="script">one</span><span>sweet year</span></span>
           </div>
         </div>
 
+        <p className="photo-whisper">A little smile, a lifetime of love</p>
+        </div>
+        <div className="hero-copy">
         <h1 id="hero-name" className="enter mt-7" style={delay(500)}>
           <span className="script gold-text block px-2 pb-2 pt-1 text-[clamp(2.75rem,14.6vw,4.6rem)] leading-[1.15]">
             {c.displayFirst}
@@ -72,7 +83,7 @@ function Hero() {
           <span className="caps block text-[1.3rem] tracking-[0.3em] text-gold-ink">{c.displayLast}</span>
         </h1>
 
-        <p className="caps enter mx-auto mt-4 max-w-[17rem] text-[1.05rem] leading-snug text-ink" style={delay(620)}>
+        <p className="celebration-title caps enter mx-auto mt-4 max-w-[17rem] text-[1.05rem] leading-snug text-ink" style={delay(620)}>
           {event.title}
         </p>
 
@@ -99,6 +110,8 @@ function Hero() {
           {event.tagline}
         </p>
         <HeartRule className="enter mt-4" />
+        <div className="hero-actions enter" style={delay(1050)}><a href="#rsvp" className="btn btn-primary"><Icon name="envelope" size={19} />Join the celebration</a><a className="calendar-link" href="/isabelle-celebration.ics" download><Icon name="heart" size={15} />Save the date</a></div>
+        </div>
       </div>
     </section>
   );
@@ -109,6 +122,7 @@ function Hero() {
 function SectionIntro({ icon, id, heading, text }: { icon: IconName; id: string; heading: string; text: string }) {
   return (
     <div data-reveal-stagger className="text-center">
+      <ChapterLabel>{id === "christening-heading" ? "01 · A little faith" : id === "reception-heading" ? "02 · A little magic" : "With love, from our family"}</ChapterLabel>
       <IconSprigs icon={icon} />
       <h2 id={id} className="heading mt-3">
         {heading}
@@ -134,7 +148,7 @@ function VenueCard({
   mapUrl: string;
 }) {
   return (
-    <div className="card relative z-[1] px-6 pb-6 pt-5 text-center" data-reveal="zoom">
+    <div className="card venue-card relative z-[1] px-6 pb-6 pt-5 text-center" data-reveal="zoom">
       <Icon name={icon} size={30} strokeWidth={1.3} className="mx-auto text-gold" />
       <p className="eyebrow mt-2 !text-[0.85rem]">{label}</p>
       <p className="venue-time mt-2 font-display font-medium leading-tight"><span>{time.replace(/\s*(AM|PM)$/i, "")}</span>{" "}<span className="venue-period">{time.match(/(AM|PM)$/i)?.[1]}</span></p>
@@ -163,7 +177,8 @@ function Column({ children, className = "" }: { children: ReactNode; className?:
 function Christening() {
   const c = event.christening;
   return (
-    <section className="relative pb-14 pt-20" aria-labelledby="christening-heading">
+    <section id="christening" className="garden-chapter relative pb-14 pt-20" aria-labelledby="christening-heading">
+      <GardenLights />
       <EdgeBouquet side="left" tone="lavender">
         <Butterfly tone="periwinkle" size={36} tilt={-10} path={4} dur={11} flap={3} delay={2} appear={0.8} className="left-[78%] -top-[2%]" />
       </EdgeBouquet>
@@ -190,7 +205,8 @@ function Reception() {
   const r = event.reception;
   const name = event.celebrant.shortName;
   return (
-    <section className="relative pb-14 pt-20" aria-labelledby="reception-heading">
+    <section id="reception" className="garden-chapter relative pb-14 pt-20" aria-labelledby="reception-heading">
+      <GardenLights />
       <EdgeBouquet side="right" tone="blush">
         <Butterfly tone="lavender" size={40} tilt={12} path={2} dur={12} flap={3.3} delay={4} appear={1} className="right-[78%] -top-[2%]" />
       </EdgeBouquet>
@@ -203,7 +219,7 @@ function Reception() {
               alt={`${name} in a pink and lavender dress at her birthday photoshoot`}
               label={`Enlarge ${name}'s birthday photo`}
             >
-              <span data-reveal="unveil" className="block overflow-hidden rounded-[1.4rem] border-[6px] border-paper shadow-[0_24px_50px_-26px_rgb(88_69_54/0.5)]">
+              <span data-reveal="unveil" className="birthday-frame block overflow-hidden rounded-[1.4rem] border-[6px] border-paper shadow-[0_24px_50px_-26px_rgb(88_69_54/0.5)]">
                 <Photo
                   id="birthday"
                   alt={`${name} in a pink and lavender dress at her birthday photoshoot`}
@@ -214,6 +230,7 @@ function Reception() {
             </Lightbox>
           </div>
         </div>
+        <p className="photo-whisper mt-4">Our little girl, turning one</p>
         <div className="mt-6">
           <VenueCard icon="cake" label={r.label} time={r.time} venue={r.venue} address={r.address} mapUrl={r.map.url} />
         </div>
@@ -233,7 +250,7 @@ function Reception() {
 
 function DetailCard({ icon, title, from, children }: { icon: IconName; title: string; from: "left" | "right"; children: ReactNode }) {
   return (
-    <div className="card px-5 py-6" data-reveal={from}>
+    <div className="card detail-card px-5 py-6" data-reveal={from}>
       <div className="flex items-center gap-3">
         <span className="grid size-11 flex-none place-items-center rounded-full bg-lavender/70 text-plum" aria-hidden="true">
           <Icon name={icon} size={24} strokeWidth={1.3} />
@@ -248,19 +265,20 @@ function DetailCard({ icon, title, from, children }: { icon: IconName; title: st
 function Details() {
   const d = event.details;
   return (
-    <section className="relative pb-14 pt-20" aria-labelledby="details-heading">
+    <section id="details" className="garden-details relative pb-14 pt-20" aria-labelledby="details-heading">
       <EdgeBouquet side="left" tone="blush">
         <Butterfly tone="ivory" size={36} tilt={-6} path={1} dur={14} flap={3.6} delay={5} appear={1.4} className="left-[78%] top-0" />
       </EdgeBouquet>
       <Column>
         <div className="text-center" data-reveal-stagger>
+          <ChapterLabel>03 · The thoughtful little things</ChapterLabel>
           <IconSprigs icon="bow" />
           <h2 id="details-heading" className="heading mt-3">
             {d.heading}
           </h2>
         </div>
 
-        <div className="mt-8 space-y-5">
+        <div className="details-grid mt-8 space-y-5">
           <DetailCard icon="dress" title={d.dressCode.heading} from="left">
             <dl className="mt-4 grid grid-cols-2 gap-3" data-reveal-stagger>
               {d.dressCode.rows.map((row, i) => (
@@ -317,13 +335,14 @@ function Details() {
 function Rsvp() {
   const r = event.rsvp;
   return (
-    <section id="rsvp" className="relative pt-20" aria-labelledby="rsvp-heading">
+    <section id="rsvp" className="garden-rsvp relative pt-20" aria-labelledby="rsvp-heading">
       <EdgeBouquet side="right" tone="lavender">
         <Butterfly tone="periwinkle" size={38} tilt={10} path={4} dur={10} flap={3.1} delay={2.5} appear={1.2} className="right-[78%] top-0" />
       </EdgeBouquet>
       <Column>
         <SectionIntro icon="envelope" id="rsvp-heading" heading={r.heading} text={r.text} />
-        <div className="mt-7" data-reveal>
+        <div className="rsvp-paper mt-7" data-reveal>
+          <p className="reply-label">A seat saved with love</p>
           <RsvpForm />
         </div>
       </Column>

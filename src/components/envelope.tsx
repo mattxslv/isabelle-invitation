@@ -3,8 +3,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { godparents } from "@/content/event";
+import { GardenLights } from "./garden";
 import { Corner } from "./deco";
 import { Butterfly } from "./butterfly";
+import { Celebration } from "./celebration";
 import { HeartRule, WaxSeal } from "./ornaments";
 
 export function Envelope({ greeting }: { greeting: string }) {
@@ -24,7 +26,9 @@ export function Envelope({ greeting }: { greeting: string }) {
   }
   return (
     <section className={`gp-scene tap-envelope ${opened ? "is-open" : ""}`} aria-label="A little letter for you">
+      {opened && <Celebration gentle />}
       <div className="gp-sticky">
+        <GardenLights />
         <Corner pos="tl" eager width="clamp(110px, 30vw, 18rem)" />
         <Butterfly tone="lavender" size={36} className="left-[12%] bottom-[15%]" />
         <Butterfly tone="blush" size={36} className="right-[12%] bottom-[20%]" />
@@ -39,6 +43,7 @@ export function Envelope({ greeting }: { greeting: string }) {
           <span className="env-front" />
           <span className="env-flap" />
           <span className="env-seal"><WaxSeal letter="I" /></span>
+          <span className="envelope-address">For someone very special</span>
         </button>
         <p className="envelope-hint"><img src="/animations/bell.svg" width={24} height={24} alt="" />{opened ? "A little love, just for you…" : "Tap the seal to open your letter"}</p>
       </div>
