@@ -1,0 +1,150 @@
+{
+  "hero": {
+    "width": 2436,
+    "height": 3045,
+    "sources": [
+      {
+        "width": 360,
+        "height": 450,
+        "avif": "/photos/hero-360.avif",
+        "webp": "/photos/hero-360.webp"
+      },
+      {
+        "width": 540,
+        "height": 675,
+        "avif": "/photos/hero-540.avif",
+        "webp": "/photos/hero-540.webp"
+      },
+      {
+        "width": 720,
+        "height": 900,
+        "avif": "/photos/hero-720.avif",
+        "webp": "/photos/hero-720.webp"
+      },
+      {
+        "width": 1080,
+        "height": 1350,
+        "avif": "/photos/hero-1080.avif",
+        "webp": "/photos/hero-1080.webp"
+      }
+    ],
+    "full": {
+      "width": 1200,
+      "height": 1800,
+      "avif": "/photos/hero-full.avif",
+      "webp": "/photos/hero-full.webp"
+    },
+    "placeholder": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAABwBACdASoQABQAPu1iqk2ppaQiMAgBMB2JYgCdMoR3ACofyhB6Tm1As2Ik4AD+3tw0AyrxNzSL92BZK9UjPSPRcwItgu6r0YiUVpXUpSSqQsFotmzqkAAA"
+  },
+  "birthday": {
+    "width": 4872,
+    "height": 3654,
+    "sources": [
+      {
+        "width": 400,
+        "height": 300,
+        "avif": "/photos/birthday-400.avif",
+        "webp": "/photos/birthday-400.webp"
+      },
+      {
+        "width": 640,
+        "height": 480,
+        "avif": "/photos/birthday-640.avif",
+        "webp": "/photos/birthday-640.webp"
+      },
+      {
+        "width": 960,
+        "height": 720,
+        "avif": "/photos/birthday-960.avif",
+        "webp": "/photos/birthday-960.webp"
+      },
+      {
+        "width": 1280,
+        "height": 960,
+        "avif": "/photos/birthday-1280.avif",
+        "webp": "/photos/birthday-1280.webp"
+      }
+    ],
+    "full": {
+      "width": 1800,
+      "height": 1200,
+      "avif": "/photos/birthday-full.avif",
+      "webp": "/photos/birthday-full.webp"
+    },
+    "placeholder": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAwAA4BaJZgCdADdel+YrWAA/paqMqpjaRbeSaR9GYD/EHGqUiLTUuTsobfGkfgAAA=="
+  },
+  "letter": {
+    "width": 2610,
+    "height": 3262,
+    "sources": [
+      {
+        "width": 320,
+        "height": 400,
+        "avif": "/photos/letter-320.avif",
+        "webp": "/photos/letter-320.webp"
+      },
+      {
+        "width": 480,
+        "height": 600,
+        "avif": "/photos/letter-480.avif",
+        "webp": "/photos/letter-480.webp"
+      },
+      {
+        "width": 720,
+        "height": 900,
+        "avif": "/photos/letter-720.avif",
+        "webp": "/photos/letter-720.webp"
+      },
+      {
+        "width": 960,
+        "height": 1200,
+        "avif": "/photos/letter-960.avif",
+        "webp": "/photos/letter-960.webp"
+      }
+    ],
+    "full": {
+      "width": 1800,
+      "height": 1200,
+      "avif": "/photos/letter-full.avif",
+      "webp": "/photos/letter-full.webp"
+    },
+    "placeholder": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAACQAwCdASoQABQAPu1kqU2ppaOiMAgBMB2JQBOgA2tMLvGIaBWwAPgjfYSOHsfIc1KANaTaOBJ/7KjsTU/isAUSbWFJYjWCFK2v1f4eMuyii88gpPjVoK6rdw4AAA=="
+  },
+  "closing": {
+    "width": 2088,
+    "height": 2610,
+    "sources": [
+      {
+        "width": 280,
+        "height": 350,
+        "avif": "/photos/closing-280.avif",
+        "webp": "/photos/closing-280.webp"
+      },
+      {
+        "width": 420,
+        "height": 525,
+        "avif": "/photos/closing-420.avif",
+        "webp": "/photos/closing-420.webp"
+      },
+      {
+        "width": 640,
+        "height": 800,
+        "avif": "/photos/closing-640.avif",
+        "webp": "/photos/closing-640.webp"
+      },
+      {
+        "width": 840,
+        "height": 1050,
+        "avif": "/photos/closing-840.avif",
+        "webp": "/photos/closing-840.webp"
+      }
+    ],
+    "full": {
+      "width": 1200,
+      "height": 1800,
+      "avif": "/photos/closing-full.avif",
+      "webp": "/photos/closing-full.webp"
+    },
+    "placeholder": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAwCdASoQABQAPu1iqk2ppaQiMAgBMB2JYwC7AB363Yho6Cv2K8AA/t7dwnCkaoKpQTqonXem0l4iecDOolxm92mBOMfN3vvQIEMbEsbhEd0gesyW2SeCAAA="
+  }
+}

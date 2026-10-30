@@ -1,0 +1,8 @@
+# Never upload the child's original photos, previews, local data, or secrets.
+/private
+/.data
+.env*
+!.env.example
+/node_modules
+/.next
+/coverage
